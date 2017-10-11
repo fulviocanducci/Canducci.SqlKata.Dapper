@@ -43,9 +43,15 @@ namespace Canducci.SqlKata.Dapper
         }
         #endregion Init
 
+
+        //public override QueryBuilderDapper NewQuery()
+        //{
+        //    return NewQuery();
+        //}
+
         public int Execute(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = Compiler();
+            SqlResult result = Compiler();            
             return connection.Execute(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
         }
 
