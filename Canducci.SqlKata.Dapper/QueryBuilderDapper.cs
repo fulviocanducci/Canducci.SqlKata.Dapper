@@ -20,7 +20,7 @@ namespace Canducci.SqlKata.Dapper
         public QueryBuilderDapper(IDbConnection connection, Compiler compiler, string table)
             : base(table)
         {
-            Init(connection, compiler);
+            Init(connection, compiler); 
         }
 
         #region Execute
