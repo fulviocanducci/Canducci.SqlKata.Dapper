@@ -6,6 +6,7 @@
     <PackageIconUrl>http://www.oracle.com/technetwork/developer-tools/sql-developer/sqldev-64-2015-2530893.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0-Beta-2</Version>
   </PropertyGroup>
 
   <ItemGroup>
