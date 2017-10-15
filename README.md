@@ -12,3 +12,57 @@ The base class of the Canducci SqlKata Dapper generates the SQL and then execute
 
 This package follows the same trend in the generation of SqlKata that for the moment generates SQL for three types of database manager systems that are: MySQL, Postgresql and SqlServer.
 
+## Installation
+
+##### _MySQL:_
+
+```
+> Install-Package Canducci.SqlKata.Dapper.MySql
+```
+
+##### _Postgresql_
+
+```
+> Install-Package Canducci.SqlKata.Dapper.Postgres
+```
+
+##### _SqlServer_
+
+```
+> Install-Package Canducci.SqlKata.Dapper.SqlServer
+```
+
+
+## How to use?
+
+Add the two namespace:
+```
+ using Canducci.SqlKata.Dapper.Extensions;
+ using Canducci.SqlKata.Dapper.SqlServer;
+```
+
+Create a connection for example with SqlServer and use it as follows.
+
+```
+string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;MultipleActiveResultSets=true;";
+using(SqlConnection connection = new SqlConnection(strConnection))
+{
+	var result = connection
+		.Build()
+		.From("People")
+		.Insert(new Dictionary<string, object> 
+		{
+			["Name"] = Guid.NewGuid().ToString(),
+			["Created"] = DateTime.Now.AddDays(-1000),
+			["Active"] = true
+		})
+		.Execute();
+
+	if (result == 1) 
+	{
+		Console.WriteLine("Gravado com sucesso !!!");
+		Console.WriteLine();
+	}
+}
+```
+
