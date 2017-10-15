@@ -1,6 +1,7 @@
 # Canducci SqlKata Dapper
 
 [![Version](https://img.shields.io/nuget/v/Canducci.SqlKata.Dapper.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper/)
+[![NuGet](https://img.shields.io/nuget/dt/Canducci.SqlKata.Dapper.svg)](https://Canducci.SqlKata.Dapper)
 
 [![Canducci SqlKata Dapper](http://i1194.photobucket.com/albums/aa377/netdragoon1/abcdef_zpsh8xp8c88.png)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper/)
 
@@ -17,6 +18,7 @@ This package follows the same trend in the generation of SqlKata that for the mo
 ##### _MySQL:_
 
 [![Version](https://img.shields.io/nuget/v/Canducci.SqlKata.Dapper.MySql.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper.MySql/)
+[![NuGet](https://img.shields.io/nuget/dt/Canducci.SqlKata.Dapper.MySql.svg)](https://Canducci.SqlKata.Dapper.MySql)
 
 ```
 > Install-Package Canducci.SqlKata.Dapper.MySql
@@ -25,6 +27,7 @@ This package follows the same trend in the generation of SqlKata that for the mo
 ##### _Postgresql_
 
 [![Version](https://img.shields.io/nuget/v/Canducci.SqlKata.Dapper.Postgres.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper.Postgres/)
+[![NuGet](https://img.shields.io/nuget/dt/Canducci.SqlKata.Dapper.Postgres.svg)](https://Canducci.SqlKata.Dapper.Postgres)
 
 ```
 > Install-Package Canducci.SqlKata.Dapper.Postgres
@@ -33,6 +36,7 @@ This package follows the same trend in the generation of SqlKata that for the mo
 ##### _SqlServer_
 
 [![Version](https://img.shields.io/nuget/v/Canducci.SqlKata.Dapper.SqlServer.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper.SqlServer/)
+[![NuGet](https://img.shields.io/nuget/dt/Canducci.SqlKata.Dapper.SqlServer.svg)](https://Canducci.SqlKata.Dapper.SqlServer)
 
 ```
 > Install-Package Canducci.SqlKata.Dapper.SqlServer
