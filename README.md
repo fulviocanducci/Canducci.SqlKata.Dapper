@@ -44,7 +44,7 @@ Add the two namespace:
 Create a connection for example with SqlServer and use it as follows.
 
 ```
-string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;MultipleActiveResultSets=true;";
+string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;";
 using(SqlConnection connection = new SqlConnection(strConnection))
 {
 	var result = connection
