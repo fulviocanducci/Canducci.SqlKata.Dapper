@@ -16,17 +16,23 @@ This package follows the same trend in the generation of SqlKata that for the mo
 
 ##### _MySQL:_
 
+[![Version](https://img.shields.io/nuget/v/Canducci.SqlKata.Dapper.MySql.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper.MySql/)
+
 ```
 > Install-Package Canducci.SqlKata.Dapper.MySql
 ```
 
 ##### _Postgresql_
 
+[![Version](https://img.shields.io/nuget/v/Canducci.SqlKata.Dapper.Postgres.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper.Postgres/)
+
 ```
 > Install-Package Canducci.SqlKata.Dapper.Postgres
 ```
 
 ##### _SqlServer_
+
+[![Version](https://img.shields.io/nuget/v/Canducci.SqlKata.Dapper.SqlServer.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper.SqlServer/)
 
 ```
 > Install-Package Canducci.SqlKata.Dapper.SqlServer
@@ -43,6 +49,8 @@ Add the two namespace:
 
 Create a connection for example with SqlServer and use it as follows.
 
+#### Insert
+
 ```
 string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;";
 using(SqlConnection connection = new SqlConnection(strConnection))
@@ -58,11 +66,93 @@ using(SqlConnection connection = new SqlConnection(strConnection))
 		})
 		.Execute();
 
-	if (result == 1) 
-	{
-		Console.WriteLine("Gravado com sucesso !!!");
-		Console.WriteLine();
+	if (result == 1)  // Saved successfully
+	{  		
 	}
+}
+```
+
+#### Update
+
+```
+string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;";
+using(SqlConnection connection = new SqlConnection(strConnection))
+{
+	var result = connection
+		.Build()
+		.From("People")
+		.Update(new Dictionary<string, object> 
+		{			
+			["Active"] = false
+		})
+		.Where("Id", 1)
+		.Execute();
+
+	if (result == 1) // Updated successfully
+	{      		
+	}
+}
+```
+
+#### Delete
+
+```
+string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;";
+using(SqlConnection connection = new SqlConnection(strConnection))
+{
+	var result = connection
+		.Build()
+		.From("People")                   
+		.Where("Id", 1)
+		.Delete()
+		.Execute();
+
+	if (result == 1) // Deleted successfully
+	{      	
+	}
+}
+
+```
+
+#### Select
+
+_Base Class:_
+
+```
+public class People 
+{
+	public int Id { get; set; } 
+	public string Name { get; set; }
+	public System.DateTime Created { get; set; }
+	public bool Active { get; set; } = true;
+}
+```
+
+_List of People:_  (`IEnumerable<People>`)
+
+```
+string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;";
+using(SqlConnection connection = new SqlConnection(strConnection))
+{
+	IEnumerable<People> result = connection
+		.Build()
+		.From("People")                   
+		.Query<People>();	
+}
+```
+
+_First of People:_  (`People`)
+
+```
+string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;";
+using(SqlConnection connection = new SqlConnection(strConnection))
+{
+	People result = connection
+		.Build()
+		.From("People")                   
+		.Where("Id", 2)
+		.QueryFirst<People>();
+	
 }
 ```
 
