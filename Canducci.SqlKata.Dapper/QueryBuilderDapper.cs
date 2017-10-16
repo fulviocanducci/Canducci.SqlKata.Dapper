@@ -12,8 +12,7 @@ namespace Canducci.SqlKata.Dapper
     public class QueryBuilderDapper : Query
     {
         private IDbConnection connection;
-        private Compiler compiler;
-        private string commandLastId { get; set; } = "";
+        private Compiler compiler;        
         public QueryBuilderDapper(IDbConnection connection, Compiler compiler)
         {
             Init(connection, compiler);
@@ -41,13 +40,6 @@ namespace Canducci.SqlKata.Dapper
         {
             this.connection = connection ?? throw new ArgumentNullException(nameof(connection));
             this.compiler = compiler ?? throw new ArgumentNullException(nameof(compiler));
-
-            if (compiler is MySqlCompiler)
-                commandLastId = ";SELECT LAST_INSERT_ID();";
-            else if (compiler is SqlServerCompiler)
-                commandLastId = ";SELECT SCOPE_IDENTITY();";
-            else if (compiler is PostgresCompiler)
-                commandLastId = ";returning id;";
         }
         #endregion Init
         
@@ -367,41 +359,18 @@ namespace Canducci.SqlKata.Dapper
                 .ExecuteAsync(result.Sql, result.Bindings, transaction, commandTimeout, commandType) == 1;
         }
 
-        public ResultInsert<T> SaveInsert<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public bool SaveInsert(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)            
         {
-            SqlResult result = Compiler();
-            ResultInsert<T> resultInsert = new ResultInsert<T>();            
-            if (!result.Sql.ToUpper().Contains("INSERT")) 
-                throw new NotSupportedException("Only EngineScope is INSERT");
-            try
-            {
-                resultInsert.LastInsertId = connection.ExecuteScalar<T>(result.Sql + commandLastId, result.Bindings, transaction, commandTimeout, commandType);
-                resultInsert.Status = true;
-                return resultInsert;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }            
+            SqlResult result = Compiler();                                       
+            return connection
+                .Execute(result.Sql, result.Bindings, transaction, commandTimeout, commandType) == 1;                            
         }
 
-        public async Task<ResultInsert<T>> SaveInsertAsync<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public async Task<bool> SaveInsertAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = Compiler();
-            ResultInsert<T> resultInsert = new ResultInsert<T>();
-            if (!result.Sql.ToUpper().Contains("INSERT"))
-                throw new NotSupportedException("Only EngineScope is INSERT");
-            try
-            {
-                resultInsert.LastInsertId = await connection
-                    .ExecuteScalarAsync<T>(result.Sql + commandLastId, result.Bindings, transaction, commandTimeout, commandType);
-                resultInsert.Status = true;
-                return resultInsert;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            SqlResult result = Compiler();            
+            return await connection
+                .ExecuteAsync(result.Sql, result.Bindings, transaction, commandTimeout, commandType) == 1;                           
         }
 
         #endregion SoftQueryDapperExtensions

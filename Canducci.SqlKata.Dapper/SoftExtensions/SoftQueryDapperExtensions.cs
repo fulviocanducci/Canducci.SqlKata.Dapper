@@ -17,6 +17,7 @@ namespace Canducci.SqlKata.Dapper.SoftExtensions
             }
             throw new NotSupportedException("Only instances QueryBuilderDapper.");
         }
+
         public static async Task<T> FindOneAsync<T>(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             if (query is QueryBuilderDapper queryBuilderDapper)
@@ -67,22 +68,22 @@ namespace Canducci.SqlKata.Dapper.SoftExtensions
             throw new NotSupportedException("Only instances QueryBuilderDapper.");
         }
 
-        public static ResultInsert<T> SaveInsert<T>(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public static bool SaveInsert(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)            
         {
             if (query is QueryBuilderDapper queryBuilderDapper)
             {
                 return queryBuilderDapper
-                    .SaveInsert<T>(transaction, commandTimeout, commandType);                
+                    .SaveInsert(transaction, commandTimeout, commandType);                
             }
             throw new NotSupportedException("Only instances QueryBuilderDapper.");
         }
 
-        public static async Task<ResultInsert<T>> SaveInsertAsync<T>(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public static async Task<bool> SaveInsertAsync(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             if (query is QueryBuilderDapper queryBuilderDapper)
             {
                 return await queryBuilderDapper
-                    .SaveInsertAsync<T>(transaction, commandTimeout, commandType);
+                    .SaveInsertAsync(transaction, commandTimeout, commandType);
             }
             throw new NotSupportedException("Only instances QueryBuilderDapper.");
         }
