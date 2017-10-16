@@ -6,16 +6,16 @@
     <PackageIconUrl>http://www.oracle.com/technetwork/developer-tools/sql-developer/sqldev-64-2015-2530893.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.0-Beta-2.0.1</Version>
+    <Version>1.0.0-Beta-2.0.2</Version>
     <Product>Canducci SqlKata Dapper SqlServer</Product>
     <Company>Canducci</Company>
     <Authors>Canducci</Authors>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
-    <FileVersion>1.0.0.3</FileVersion>
+    <AssemblyVersion>1.0.0.4</AssemblyVersion>
+    <FileVersion>1.0.0.4</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.0-beta-1.0.1" />
+    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.0-beta-2.0.2" />
   </ItemGroup>
 
 </Project>
