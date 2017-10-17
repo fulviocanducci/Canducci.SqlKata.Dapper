@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using static Dapper.SqlMapper;
-
+using Canducci.SqlKata.Dapper.SoftExtensions;
 namespace Canducci.SqlKata.Dapper
 {
     public class QueryBuilderDapper : Query
@@ -28,10 +28,23 @@ namespace Canducci.SqlKata.Dapper
         private SqlResult Compiler()
         {
             return compiler.Compile(this);
-        }
-        private SqlResult Compiler(Query query)
+        }        
+        private SqlResult Compiler<T>(string name)
+            where T : struct
         {
-            return compiler.Compile(query);
+            if (compiler is MySqlCompiler c)
+            {
+                return c.CompileWithLastId(this);
+            }
+            else if (compiler is SqlServerCompiler s)
+            {
+                return s.CompileWithLastId<T>(this, name: name);
+            }
+            else if (compiler is PostgresCompiler p)
+            {
+                return p.CompileWithLastId(this);
+            }
+            throw new Exception("Compiler");
         }
         #endregion
 
@@ -371,6 +384,14 @@ namespace Canducci.SqlKata.Dapper
             SqlResult result = Compiler();            
             return await connection
                 .ExecuteAsync(result.Sql, result.Bindings, transaction, commandTimeout, commandType) == 1;                           
+        }
+
+        public T SaveInsertGetByIdInserted<T>(string name = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+            where T: struct
+        {
+            SqlResult result = Compiler<T>(name);
+            return connection
+                .ExecuteScalar<T>(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
         }
 
         #endregion SoftQueryDapperExtensions

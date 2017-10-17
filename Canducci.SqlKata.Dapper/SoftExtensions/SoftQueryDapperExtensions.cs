@@ -87,5 +87,16 @@ namespace Canducci.SqlKata.Dapper.SoftExtensions
             }
             throw new NotSupportedException("Only instances QueryBuilderDapper.");
         }
+
+        public static T SaveInsertGetByIdInserted<T>(this Query query, string name = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+            where T : struct
+        {
+            if (query is QueryBuilderDapper queryBuilderDapper)
+            {
+                return queryBuilderDapper
+                    .SaveInsertGetByIdInserted<T>(name, transaction, commandTimeout, commandType);
+            }
+            throw new NotSupportedException("Only instances QueryBuilderDapper.");
+        }
     }
 }
