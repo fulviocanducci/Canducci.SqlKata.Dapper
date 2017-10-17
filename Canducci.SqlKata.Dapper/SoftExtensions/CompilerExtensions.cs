@@ -18,7 +18,7 @@ namespace Canducci.SqlKata.Dapper.SoftExtensions
             string sqlComplement = string.Empty;
             if (typeof(T) == typeof(int) || typeof(T) == typeof(long))
             {
-                sqlComplement = ";SELECT SCOPE_IDENTITY();";
+                sqlComplement = ";SELECT SCOPE_IDENTITY();"; 
             }
             else if (typeof(T) == typeof(Guid))
             {
