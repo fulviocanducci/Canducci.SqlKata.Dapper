@@ -1,0 +1,9 @@
+﻿Restoring packages for C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\Canducci.SqlKata.Dapper.Postgres.csproj...
+Installing NuGet package Canducci.SqlKata.Dapper 1.0.0-beta-2.0.3.
+Committing restore...
+Writing lock file to disk. Path: C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\obj\project.assets.json
+Restore completed in 218,45 ms for C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\Canducci.SqlKata.Dapper.Postgres.csproj.
+Executing nuget actions took 85,28 ms
+Time Elapsed: 00:00:00.3633382
+========== Finished ==========
+
