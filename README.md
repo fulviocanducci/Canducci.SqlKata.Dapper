@@ -2,6 +2,7 @@
 
 [![Version](https://img.shields.io/nuget/v/Canducci.SqlKata.Dapper.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper/)
 [![NuGet](https://img.shields.io/nuget/dt/Canducci.SqlKata.Dapper.svg)](https://Canducci.SqlKata.Dapper)
+[![Build Status](https://travis-ci.org/fulviocanducci/Canducci.SqlKata.Dapper.svg?branch=master)](https://travis-ci.org/fulviocanducci/Canducci.SqlKata.Dapper)
 
 [![Canducci SqlKata Dapper](http://i1194.photobucket.com/albums/aa377/netdragoon1/abcdef_zpsh8xp8c88.png)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper/)
 
