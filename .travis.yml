@@ -4,11 +4,11 @@ dotnet: 2.0.0
 solution: Canducci.SqlKata.Dapper.sln
 install:
   - dotnet restore Canducci.SqlKata.Dapper/Canducci.SqlKata.Dapper.csproj
-  - dotnet restore Canducci.SqlKata.Dapper.Mysql/Canducci.SqlKata.Dapper.Mysql.csproj
-  - dotnet restore Canducci.SqlKata.Postgres/Canducci.SqlKata.Dapper.Postgres.csproj
-  - dotnet restore Canducci.SqlKata.SqlServer/Canducci.SqlKata.Dapper.SqlServer.csproj
+  - dotnet restore Canducci.SqlKata.Dapper.MySql/Canducci.SqlKata.Dapper.MySql.csproj
+  - dotnet restore Canducci.SqlKata.Dapper.Postgres/Canducci.SqlKata.Dapper.Postgres.csproj
+  - dotnet restore Canducci.SqlKata.Dapper.SqlServer/Canducci.SqlKata.Dapper.SqlServer.csproj
 script:
   - dotnet build Canducci.SqlKata.Dapper/Canducci.SqlKata.Dapper.csproj
-  - dotnet build Canducci.SqlKata.Dapper.Mysql/Canducci.SqlKata.Dapper.Mysql.csproj
-  - dotnet build Canducci.SqlKata.Postgres/Canducci.SqlKata.Dapper.Postgres.csproj
-  - dotnet build Canducci.SqlKata.SqlServer/Canducci.SqlKata.Dapper.SqlServer.csproj
+  - dotnet build Canducci.SqlKata.Dapper.MySql/Canducci.SqlKata.Dapper.MySql.csproj
+  - dotnet build Canducci.SqlKata.Dapper.Postgres/Canducci.SqlKata.Dapper.Postgres.csproj
+  - dotnet build Canducci.SqlKata.Dapper.SqlServer/Canducci.SqlKata.Dapper.SqlServer.csproj
