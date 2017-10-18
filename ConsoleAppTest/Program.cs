@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Canducci.SqlKata.Dapper.SoftExtensions;
 using Canducci.SqlKata.Dapper;
 using SqlKata.Compilers;
 using Npgsql;
 using MySql.Data.MySqlClient;
+using Canducci.SqlKata.Dapper.Extensions.Builder;
 
 namespace ConsoleAppTest
 {
@@ -39,15 +39,16 @@ namespace ConsoleAppTest
                 //})
                 //.SaveInsertGetByIdInserted<long>();
 
-                var db = new QueryBuilderDapper(connection, compiler, "Credit");
-                var r = db.Insert(new Dictionary<string, object>
-                {
-                    ["Description"] = "Credit - teste" + Guid.NewGuid().ToString(),                    
-                })
-                .SaveInsertGetByIdInserted<Guid>("id");
+                //var db = new QueryBuilderDapper(connection, compiler, "Credit");
+                //var r = db.Insert(new Dictionary<string, object>
+                //{
+                //    ["Description"] = "Credit - teste" + Guid.NewGuid().ToString(),                    
+                //})
+                
+                
 
 
-                Console.WriteLine($"Resultado: {r}");
+                //Console.WriteLine($"Resultado: {r}");
 
 
             }

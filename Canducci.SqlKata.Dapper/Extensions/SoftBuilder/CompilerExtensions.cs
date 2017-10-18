@@ -1,7 +1,7 @@
 ﻿using SqlKata;
 using SqlKata.Compilers;
 using System;
-namespace Canducci.SqlKata.Dapper.SoftExtensions
+namespace Canducci.SqlKata.Dapper.Extensions.SoftBuilder
 {
     public static class CompilerExtensions
     {

@@ -5,7 +5,7 @@ using System.Data;
 using System.Threading.Tasks;
 using static Dapper.SqlMapper;
 
-namespace Canducci.SqlKata.Dapper.Extensions
+namespace Canducci.SqlKata.Dapper.Extensions.Builder
 {
     public static class QueryDapperExtensions
     {       

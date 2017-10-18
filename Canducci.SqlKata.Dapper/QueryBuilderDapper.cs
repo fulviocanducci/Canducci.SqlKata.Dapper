@@ -6,56 +6,21 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using static Dapper.SqlMapper;
-using Canducci.SqlKata.Dapper.SoftExtensions;
 namespace Canducci.SqlKata.Dapper
 {
-    public class QueryBuilderDapper : Query
+    public class QueryBuilderDapper : QueryBuilder
     {
-        private IDbConnection connection;
-        private Compiler compiler;        
-        public QueryBuilderDapper(IDbConnection connection, Compiler compiler)
-        {
-            Init(connection, compiler);
-        }
 
-        public QueryBuilderDapper(IDbConnection connection, Compiler compiler, string table)
-            : base(table)
-        {
-            Init(connection, compiler); 
-        }
+        #region Construct
 
-        #region Compiler
-        private SqlResult Compiler()
-        {
-            return compiler.Compile(this);
-        }        
-        private SqlResult Compiler<T>(string name)
-            where T : struct
-        {
-            if (compiler is MySqlCompiler c)
-            {
-                return c.CompileWithLastId(this);
-            }
-            else if (compiler is SqlServerCompiler s)
-            {
-                return s.CompileWithLastId<T>(this, name: name);
-            }
-            else if (compiler is PostgresCompiler p)
-            {
-                return p.CompileWithLastId(this);
-            }
-            throw new Exception("Compiler");
-        }
-        #endregion
+        public QueryBuilderDapper(IDbConnection connection, Compiler compiler) 
+            : base(connection, compiler) { }
 
-        #region Init
-        private void Init(IDbConnection connection, Compiler compiler)
-        {
-            this.connection = connection ?? throw new ArgumentNullException(nameof(connection));
-            this.compiler = compiler ?? throw new ArgumentNullException(nameof(compiler));
-        }
-        #endregion Init
-        
+        public QueryBuilderDapper(IDbConnection connection, Compiler compiler, string table) 
+            : base(connection, compiler, table) { }
+
+        #endregion Construct
+
         #region MethodsDapper
 
         public int Execute(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
@@ -326,74 +291,7 @@ namespace Canducci.SqlKata.Dapper
             return connection.QuerySingleOrDefaultAsync<T>(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
         }
 
-        #endregion MethodsDapper
+        #endregion MethodsDapper        
 
-        #region SoftQueryDapperExtensions
-
-        public T FindOne<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-        {
-            SqlResult result = Compiler();
-            return connection
-                .QueryFirstOrDefault<T>(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
-        }
-
-        public async Task<T> FindOneAsync<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-        {
-            SqlResult result = Compiler();
-            return await connection
-                .QueryFirstOrDefaultAsync<T>(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
-        }
-
-        public async Task<IEnumerable<T>> ListAsync<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-        {
-            SqlResult result = Compiler();
-            return await connection
-                .QueryAsync<T>(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
-        }
-
-        public IEnumerable<T> List<T>(IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
-        {
-            SqlResult result = Compiler();
-            return connection
-                .Query<T>(result.Sql, result.Bindings, transaction, buffered, commandTimeout, commandType);
-        }
-
-        public bool SaveUpdate(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-        {
-            SqlResult result = Compiler();
-            return connection
-                .Execute(result.Sql, result.Bindings, transaction, commandTimeout, commandType) == 1;
-        }
-
-        public async Task<bool> SaveUpdateAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-        {
-            SqlResult result = Compiler();
-            return await connection
-                .ExecuteAsync(result.Sql, result.Bindings, transaction, commandTimeout, commandType) == 1;
-        }
-
-        public bool SaveInsert(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)            
-        {
-            SqlResult result = Compiler();                                       
-            return connection
-                .Execute(result.Sql, result.Bindings, transaction, commandTimeout, commandType) == 1;                            
-        }
-
-        public async Task<bool> SaveInsertAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-        {
-            SqlResult result = Compiler();            
-            return await connection
-                .ExecuteAsync(result.Sql, result.Bindings, transaction, commandTimeout, commandType) == 1;                           
-        }
-
-        public T SaveInsertGetByIdInserted<T>(string name = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-            where T: struct
-        {
-            SqlResult result = Compiler<T>(name);
-            return connection
-                .ExecuteScalar<T>(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
-        }
-
-        #endregion SoftQueryDapperExtensions
     }
 }
