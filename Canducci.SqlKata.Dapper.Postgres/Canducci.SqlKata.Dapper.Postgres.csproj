@@ -1,21 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
-    <Version>1.0.0-Beta-2.0.4</Version>
+  <PropertyGroup>    
+    <Version>1.0.0-Beta-2.0.5</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</PackageProjectUrl>
     <PackageIconUrl>http://i1194.photobucket.com/albums/aa377/netdragoon1/abcdef_zpsh8xp8c88.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryUrl>
-    <AssemblyVersion>1.0.0.6</AssemblyVersion>
+    <AssemblyVersion>1.0.0.5</AssemblyVersion>
     <FileVersion>1.0.0.6</FileVersion>
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>
     <Product>Canducci SqlKata Dapper Postgres</Product>
+    <TargetFrameworks>netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.0-beta-2.0.4" />
+    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.0-beta-2.0.5" />
   </ItemGroup>
 
 </Project>
