@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using Canducci.SqlKata.Dapper;
-using SqlKata.Compilers;
-using Npgsql;
-using MySql.Data.MySqlClient;
-using Canducci.SqlKata.Dapper.Extensions.Builder;
+using Canducci.SqlKata.Dapper.SqlServer;
+using System.Data;
 
 namespace ConsoleAppTest
 {
@@ -19,18 +15,40 @@ namespace ConsoleAppTest
 
             //SQLSERVER TEST
             string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;MultipleActiveResultSets=true;";
-            Compiler compiler = new SqlServerCompiler();
+            //Compiler compiler = new SqlServerCompiler();
 
             //POSTGRESQL TEST
             //string strConnection = "Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=senha;";                        
             //Compiler compiler = new PostgresCompiler();
 
             //using (MySqlConnection connection = new MySqlConnection(strConnection))
-            using (SqlConnection connection = new SqlConnection(strConnection))
+            using (IDbConnection connection = new SqlConnection(strConnection))
             //using (NpgsqlConnection connection = new NpgsqlConnection(strConnection))
             {
 
                 //var db = new QueryBuilderDapper(connection, compiler, "People");
+                /*
+                var result0 = db.Select("*")
+                    .Where("Id", "IN", x => x.From("Bank").Select("PeopleId"))
+                    .Query();
+               */
+
+                //var result1 = db.Join("Bank", "Bank.PeopleId", "People.Id")
+                //    .Query();
+
+                //var result2 = db
+                //    .GroupBy("PeopleId")                    
+                //    .From()
+                //    .SelectRaw("PeopleId, Count(Id) as Quant")
+                //    .Query();
+
+
+                var result3 = connection
+                    .Build("Bank")
+                    .Query();
+                    //.From(x => x.From("Bank").Where("PeopleId", ">", 0), "b")                                        
+
+                
                 //var r = db.Insert(new Dictionary<string, object>
                 //{
                 //    ["Name"] = Guid.NewGuid().ToString(),
@@ -48,7 +66,7 @@ namespace ConsoleAppTest
                 
 
 
-                //Console.WriteLine($"Resultado: {r}");
+                //Console.WriteLine($"Resultado: {result.ToString()}");
 
 
             }
