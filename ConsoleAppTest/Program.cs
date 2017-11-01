@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.SqlClient;
 using Canducci.SqlKata.Dapper.SqlServer;
+using Canducci.SqlKata.Dapper.Extensions.Builder;
+using Canducci.SqlKata.Dapper.Extensions.SoftBuilder;
 using System.Data;
 
 namespace ConsoleAppTest
@@ -44,8 +46,8 @@ namespace ConsoleAppTest
 
 
                 var result3 = connection
-                    .Build("Bank")
-                    .Query();
+                    .SoftBuild("Bank")
+                    .List<dynamic>();                    
                     //.From(x => x.From("Bank").Where("PeopleId", ">", 0), "b")                                        
 
                 

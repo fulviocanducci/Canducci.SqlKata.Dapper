@@ -48,7 +48,7 @@ This package follows the same trend in the generation of [SqlKata](https://www.n
 
 Add the two namespace:
 ```
- using Canducci.SqlKata.Dapper.Extensions;
+ using Canducci.SqlKata.Dapper.Extensions.Builder
  using Canducci.SqlKata.Dapper.SqlServer;
 ```
 
