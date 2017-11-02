@@ -26,23 +26,6 @@ namespace Canducci.SqlKata.Dapper
         {
             return compiler.Compile(this);
         }
-        protected SqlResult Compiler<T>(string name)
-            where T : struct
-        {
-            if (compiler is MySqlCompiler c)
-            {
-                return c.CompileWithLastId(this);
-            }
-            else if (compiler is SqlServerCompiler s)
-            {
-                return s.CompileWithLastId<T>(this, name: name);
-            }
-            else if (compiler is PostgresCompiler p)
-            {
-                return p.CompileWithLastId(this);
-            }
-            throw new Exception("Compiler");
-        }
         #endregion
 
         #region Init
