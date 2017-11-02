@@ -2,7 +2,9 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Canducci.SqlKata.Dapper.Extensions.SoftBuilder")]
+[assembly: InternalsVisibleTo("Canducci.SqlKata.Dapper.MySql")]
+[assembly: InternalsVisibleTo("Canducci.SqlKata.Dapper.Postgres")]
+[assembly: InternalsVisibleTo("Canducci.SqlKata.Dapper.SqlServer")]
 namespace Canducci.SqlKata.Dapper.Extensions.Internals
 {
     internal static class QueryBuilderInternals

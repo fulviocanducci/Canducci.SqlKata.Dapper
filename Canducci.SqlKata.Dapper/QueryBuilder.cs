@@ -1,5 +1,4 @@
-﻿using Canducci.SqlKata.Dapper.Extensions.SoftBuilder;
-using SqlKata;
+﻿using SqlKata;
 using SqlKata.Compilers;
 using System;
 using System.Data;
