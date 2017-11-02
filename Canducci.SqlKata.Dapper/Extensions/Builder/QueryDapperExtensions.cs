@@ -1,4 +1,5 @@
-﻿using SqlKata;
+﻿using Canducci.SqlKata.Dapper.Extensions.Internals;
+using SqlKata;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,12 +10,6 @@ namespace Canducci.SqlKata.Dapper.Extensions.Builder
 {
     public static class QueryDapperExtensions
     {       
-        internal static QueryBuilderDapper AsQueryBuilderDapper(this Query query)
-        {
-            if (query is QueryBuilderDapper queryBuilderDapper)
-                return queryBuilderDapper;
-            throw new NotSupportedException("Only instances QueryBuilderDapper.");
-        }
 
         public static int Execute(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
@@ -223,5 +218,6 @@ namespace Canducci.SqlKata.Dapper.Extensions.Builder
         {
             return query.AsQueryBuilderDapper().QuerySingleOrDefaultAsync<T>(transaction, commandTimeout, commandType);
         }
+
     }
 }

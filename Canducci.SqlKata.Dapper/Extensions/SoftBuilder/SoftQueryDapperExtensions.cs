@@ -1,5 +1,5 @@
-﻿using SqlKata;
-using System;
+﻿using Canducci.SqlKata.Dapper.Extensions.Internals;
+using SqlKata;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
@@ -8,13 +8,6 @@ namespace Canducci.SqlKata.Dapper.Extensions.SoftBuilder
 {
     public static class SoftQueryDapperExtensions
     {
-        internal static QueryBuilderSoftDapper AsQueryBuilderSoftDapper(this Query query)
-        {
-            if (query is QueryBuilderSoftDapper queryBuilderSoftDapper)
-                return queryBuilderSoftDapper;            
-            throw new NotSupportedException("Only instances QueryBuilderSoftDapper.");
-        }
-
         public static T FindOne<T>(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             return query.AsQueryBuilderSoftDapper().FindOne<T>(transaction, commandTimeout, commandType);
