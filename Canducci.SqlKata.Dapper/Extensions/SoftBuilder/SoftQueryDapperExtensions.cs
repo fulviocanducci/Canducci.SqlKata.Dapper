@@ -25,6 +25,36 @@ namespace Canducci.SqlKata.Dapper.Extensions.SoftBuilder
             return await query.AsQueryBuilderSoftDapper().FindOneAsync<T>(transaction, commandTimeout, commandType);
         }
 
+        public static int UniqueResultToInt(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            return UniqueResult<int>(query, transaction, commandTimeout, commandType);
+        }
+
+        public static async Task<int> UniqueResultToIntAsync(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            return await UniqueResultAsync<int>(query, transaction, commandTimeout, commandType);
+        }
+
+        public static long UniqueResultToLong(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            return UniqueResult<long>(query, transaction, commandTimeout, commandType);
+        }
+
+        public static async Task<long> UniqueResultToLongAsync(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            return await UniqueResultAsync<long>(query, transaction, commandTimeout, commandType);
+        }
+
+        public static T UniqueResult<T>(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            return query.AsQueryBuilderSoftDapper().UniqueResult<T>(transaction, commandTimeout, commandType);
+        }
+
+        public static async Task<T> UniqueResultAsync<T>(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            return await query.AsQueryBuilderSoftDapper().UniqueResultAsync<T>(transaction, commandTimeout, commandType);
+        }
+
         public static IEnumerable<T> List<T>(this Query query, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
         {
             return query.AsQueryBuilderSoftDapper().List<T>(transaction, buffered, commandTimeout, commandType);
@@ -53,11 +83,7 @@ namespace Canducci.SqlKata.Dapper.Extensions.SoftBuilder
         public static async Task<bool> SaveInsertAsync(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             return await query.AsQueryBuilderSoftDapper().SaveInsertAsync(transaction, commandTimeout, commandType);
-        }
-
-        public static T SaveInsertGetByIdInserted<T>(this Query query, string name = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)  where T : struct
-        {
-            return query.AsQueryBuilderSoftDapper().SaveInsertGetByIdInserted<T>(name, transaction, commandTimeout, commandType);
-        }
+        }      
+        
     }
 }

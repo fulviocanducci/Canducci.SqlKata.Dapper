@@ -4,6 +4,7 @@ using Canducci.SqlKata.Dapper.SqlServer;
 using Canducci.SqlKata.Dapper.Extensions.Builder;
 using Canducci.SqlKata.Dapper.Extensions.SoftBuilder;
 using System.Data;
+using SqlKata.Compilers;
 
 namespace ConsoleAppTest
 {
@@ -17,8 +18,8 @@ namespace ConsoleAppTest
 
             //SQLSERVER TEST
             string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;MultipleActiveResultSets=true;";
-            //Compiler compiler = new SqlServerCompiler();
-
+            Compiler compiler = new SqlServerCompiler();
+            
             //POSTGRESQL TEST
             //string strConnection = "Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=senha;";                        
             //Compiler compiler = new PostgresCompiler();

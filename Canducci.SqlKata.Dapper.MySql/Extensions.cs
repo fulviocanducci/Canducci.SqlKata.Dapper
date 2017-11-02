@@ -1,6 +1,5 @@
 ﻿using SqlKata.Compilers;
 using System.Data;
-
 namespace Canducci.SqlKata.Dapper.MySql
 {
     public static class Extensions

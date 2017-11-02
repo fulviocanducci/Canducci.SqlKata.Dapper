@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 using static Dapper.SqlMapper;
 namespace Canducci.SqlKata.Dapper
 {
-    public class QueryBuilderDapper : QueryBuilder
+    public partial class QueryBuilderDapper : QueryBuilder
     {
-
         #region Construct
 
         public QueryBuilderDapper(IDbConnection connection, Compiler compiler) 
