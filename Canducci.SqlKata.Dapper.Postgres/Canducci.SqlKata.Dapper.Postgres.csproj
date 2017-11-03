@@ -21,7 +21,7 @@ https://sqlkata.com/docs</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.0-beta-5" />
+    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
