@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>    
-    <Version>1.0.0-beta-5</Version>
+    <Version>1.0.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</PackageProjectUrl>
     <PackageIconUrl>http://i1194.photobucket.com/albums/aa377/netdragoon1/abcdef_zpsh8xp8c88.png</PackageIconUrl>
@@ -15,6 +15,9 @@
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
     <PackageTags>SqlKata Dapper SQL PostGres</PackageTags>
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
+    <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
+    <PackageReleaseNotes>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper
+https://sqlkata.com/docs</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

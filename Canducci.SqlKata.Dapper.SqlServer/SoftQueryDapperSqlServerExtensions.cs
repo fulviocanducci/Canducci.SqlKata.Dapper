@@ -2,8 +2,7 @@
 using System.Data;
 using Canducci.SqlKata.Dapper.Extensions.Internals;
 using System.Threading.Tasks;
-
-namespace Canducci.SqlKata.Dapper.SqlServer
+namespace Canducci.SqlKata.Dapper.Extensions.SoftBuilder
 {
     public static class SoftQueryDapperSqlServerExtensions
     {
