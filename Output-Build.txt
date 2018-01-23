@@ -1,11 +1,24 @@
 ﻿Restoring NuGet packages...
 To prevent NuGet from restoring packages during build, open the Visual Studio Options dialog, click on the Package Manager node and uncheck 'Allow NuGet to download missing packages during build.'
-1>------ Build started: Project: Canducci.SqlKata.Dapper.SqlServer, Configuration: Release Any CPU ------
-1>Canducci.SqlKata.Dapper.SqlServer -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.SqlServer\bin\Release\netstandard1.6\Canducci.SqlKata.Dapper.SqlServer.dll
-1>Successfully created package 'C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.SqlServer\bin\Release\Canducci.SqlKata.Dapper.SqlServer.1.0.0-Beta-2.0.2.nupkg'.
-1>C:\Program Files\dotnet\sdk\2.0.2\Sdks\NuGet.Build.Tasks.Pack\build\NuGet.Build.Tasks.Pack.targets(204,5): warning : Issue found with package 'Canducci.SqlKata.Dapper.SqlServer'.
-1>C:\Program Files\dotnet\sdk\2.0.2\Sdks\NuGet.Build.Tasks.Pack\build\NuGet.Build.Tasks.Pack.targets(204,5): warning : Issue: Package version not supported on legacy clients.
-1>C:\Program Files\dotnet\sdk\2.0.2\Sdks\NuGet.Build.Tasks.Pack\build\NuGet.Build.Tasks.Pack.targets(204,5): warning : Description: The package version '1.0.0-Beta-2.0.2' uses SemVer 2.0.0 or components of SemVer 1.0.0 that are not supported on legacy clients. This message can be ignored if the package is not intended for older clients.
-1>C:\Program Files\dotnet\sdk\2.0.2\Sdks\NuGet.Build.Tasks.Pack\build\NuGet.Build.Tasks.Pack.targets(204,5): warning : Solution: Change the package version to a SemVer 1.0.0 string. If the version contains a release label it must start with a letter.
-1>Done building project "Canducci.SqlKata.Dapper.SqlServer.csproj".
-========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+1>------ Rebuild All started: Project: Canducci.SqlKata.Dapper.MySql, Configuration: Release Any CPU ------
+2>------ Rebuild All started: Project: Canducci.SqlKata.Dapper.SqlServer, Configuration: Release Any CPU ------
+3>------ Rebuild All started: Project: Canducci.SqlKata.Dapper.Postgres, Configuration: Release Any CPU ------
+1>Canducci.SqlKata.Dapper.MySql -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.MySql\bin\Release\netstandard1.4\Canducci.SqlKata.Dapper.MySql.dll
+1>Canducci.SqlKata.Dapper.MySql -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.MySql\bin\Release\netstandard1.3\Canducci.SqlKata.Dapper.MySql.dll
+1>Canducci.SqlKata.Dapper.MySql -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.MySql\bin\Release\netstandard1.5\Canducci.SqlKata.Dapper.MySql.dll
+1>Canducci.SqlKata.Dapper.MySql -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.MySql\bin\Release\netstandard1.6\Canducci.SqlKata.Dapper.MySql.dll
+1>Canducci.SqlKata.Dapper.MySql -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.MySql\bin\Release\netstandard2.0\Canducci.SqlKata.Dapper.MySql.dll
+3>Canducci.SqlKata.Dapper.Postgres -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\bin\Release\netstandard1.5\Canducci.SqlKata.Dapper.Postgres.dll
+3>Canducci.SqlKata.Dapper.Postgres -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\bin\Release\netstandard1.6\Canducci.SqlKata.Dapper.Postgres.dll
+2>Canducci.SqlKata.Dapper.SqlServer -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.SqlServer\bin\Release\netstandard1.6\Canducci.SqlKata.Dapper.SqlServer.dll
+2>Canducci.SqlKata.Dapper.SqlServer -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.SqlServer\bin\Release\netstandard1.3\Canducci.SqlKata.Dapper.SqlServer.dll
+3>Canducci.SqlKata.Dapper.Postgres -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\bin\Release\netstandard2.0\Canducci.SqlKata.Dapper.Postgres.dll
+2>Canducci.SqlKata.Dapper.SqlServer -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.SqlServer\bin\Release\netstandard1.4\Canducci.SqlKata.Dapper.SqlServer.dll
+2>Canducci.SqlKata.Dapper.SqlServer -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.SqlServer\bin\Release\netstandard1.5\Canducci.SqlKata.Dapper.SqlServer.dll
+2>Canducci.SqlKata.Dapper.SqlServer -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.SqlServer\bin\Release\netstandard2.0\Canducci.SqlKata.Dapper.SqlServer.dll
+3>Canducci.SqlKata.Dapper.Postgres -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\bin\Release\netstandard1.3\Canducci.SqlKata.Dapper.Postgres.dll
+3>Canducci.SqlKata.Dapper.Postgres -> C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\bin\Release\netstandard1.4\Canducci.SqlKata.Dapper.Postgres.dll
+1>Successfully created package 'C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.MySql\bin\Release\Canducci.SqlKata.Dapper.MySql.1.0.1.nupkg'.
+2>Successfully created package 'C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.SqlServer\bin\Release\Canducci.SqlKata.Dapper.SqlServer.1.0.1.nupkg'.
+3>Successfully created package 'C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\bin\Release\Canducci.SqlKata.Dapper.Postgres.1.0.1.nupkg'.
+========== Rebuild All: 3 succeeded, 0 failed, 0 skipped ==========
