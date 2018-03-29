@@ -2,9 +2,9 @@
 
   <PropertyGroup>    
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.0.2</AssemblyVersion>
-    <FileVersion>1.0.0.2</FileVersion>
-    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
+    <Version>1.0.3</Version>
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>
     <PackageLicenseUrl></PackageLicenseUrl>
@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryUrl>
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
     <Product>Canducci SqlKata Dapper MySql</Product>
-    <TargetFrameworks>netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks>net451;net46;net47;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
     <PackageTags>SqlKata Dapper SQL MySql</PackageTags>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
@@ -22,7 +22,7 @@ https://sqlkata.com/docs</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.2" />
+    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.3" />
   </ItemGroup>
 
 </Project>
