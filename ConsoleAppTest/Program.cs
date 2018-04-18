@@ -37,6 +37,7 @@ namespace ConsoleAppTest
             using (IDbConnection connection = new SqlConnection(strConnection))
             {
                 var c = new QueryBuilderMultiple(connection, compiler);
+                
                 var r = c
                     .AddQuery<People>(x => x.From("People").OrderBy("Id"))
                     .AddQuery<Credit>(x => x.From("Credit").OrderBy("Id"))

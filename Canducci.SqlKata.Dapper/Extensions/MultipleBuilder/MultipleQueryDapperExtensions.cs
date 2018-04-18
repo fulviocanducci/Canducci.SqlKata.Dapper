@@ -10,9 +10,9 @@ namespace Canducci.SqlKata.Dapper.Extensions.MultipleBuilder
 {
     public static class MultipleQueryDapperExtensions
     {
-        public static QueryBuilderMultiple AddQuery(this Query query, Func<Query, Query> item)
+        public static QueryBuilderMultiple AddQuery<T>(this Query query, Func<Query, Query> item)
         {
-            return query.AsQueryBuilderMultiple().AddQuery(item);
+            return query.AsQueryBuilderMultiple().AddQuery<T>(item);
         }
 
         public static IEnumerable Results(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
