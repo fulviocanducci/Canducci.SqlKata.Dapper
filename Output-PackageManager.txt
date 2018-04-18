@@ -1,9 +1,25 @@
-﻿Restoring packages for C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\Canducci.SqlKata.Dapper.Postgres.csproj...
-Installing NuGet package Canducci.SqlKata.Dapper 1.0.0-beta-2.0.3.
+﻿Restoring packages for C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.csproj...
+  GET https://api.nuget.org/v3-flatcontainer/sqlkata/index.json
+  OK https://api.nuget.org/v3-flatcontainer/sqlkata/index.json 867ms
+  GET https://api.nuget.org/v3-flatcontainer/sqlkata/1.0.0-beta-458/sqlkata.1.0.0-beta-458.nupkg
+  GET https://dotnetmyget.blob.core.windows.net/artifacts/aspnetcore-dev/nuget/v3/flatcontainer/sqlkata/index.json
+  OK https://api.nuget.org/v3-flatcontainer/sqlkata/1.0.0-beta-458/sqlkata.1.0.0-beta-458.nupkg 741ms
+  NotFound https://dotnetmyget.blob.core.windows.net/artifacts/aspnetcore-dev/nuget/v3/flatcontainer/sqlkata/index.json 1138ms
+Installing SqlKata 1.0.0-beta-458.
+Installing NuGet package SqlKata 1.0.0-beta-458.
 Committing restore...
-Writing lock file to disk. Path: C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\obj\project.assets.json
-Restore completed in 218,45 ms for C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.Postgres\Canducci.SqlKata.Dapper.Postgres.csproj.
-Executing nuget actions took 85,28 ms
-Time Elapsed: 00:00:00.3633382
+Generating MSBuild file C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper\obj\Canducci.SqlKata.Dapper.csproj.nuget.g.props.
+Writing lock file to disk. Path: C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper\obj\project.assets.json
+Restore completed in 2,91 sec for C:\Users\Developer\documents\visual studio 2017\Projects\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.csproj.
+Successfully uninstalled 'SqlKata 1.0.0-beta-441' from Canducci.SqlKata.Dapper
+Successfully installed 'SqlKata 1.0.0-beta-458' to Canducci.SqlKata.Dapper
+Executing nuget actions took 333,08 ms
+Time Elapsed: 00:00:03.8932427
+========== Finished ==========
+
+Time Elapsed: 00:00:00.1243048
+========== Finished ==========
+
+Time Elapsed: 00:00:00.1331665
 ========== Finished ==========
 
