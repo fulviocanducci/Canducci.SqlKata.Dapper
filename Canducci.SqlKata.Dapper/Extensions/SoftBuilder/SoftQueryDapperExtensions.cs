@@ -76,7 +76,12 @@ namespace Canducci.SqlKata.Dapper.Extensions.SoftBuilder
         public static async Task<bool> SaveInsertAsync(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             return await query.AsQueryBuilderSoftDapper().SaveInsertAsync(transaction, commandTimeout, commandType);
-        }      
+        }     
         
+        //public static QueryBuilderMultiple QueryBuilderMultipleCollection(this QueryBuilderSoftDapper softDapper)
+        //{
+        //    return softDapper.QueryBuilderMultipleCollection();
+        //}
+
     }
 }

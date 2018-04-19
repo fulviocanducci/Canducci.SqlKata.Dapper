@@ -9,7 +9,7 @@ using System;
 
 namespace Canducci.SqlKata.Dapper
 {
-    public partial class QueryBuilderSoftDapper : QueryBuilder
+    public partial class QueryBuilderSoftDapper : QueryBuilder, IDisposable
     {
         #region Construct
 
@@ -19,6 +19,20 @@ namespace Canducci.SqlKata.Dapper
         public QueryBuilderSoftDapper(IDbConnection connection, Compiler compiler, string table) 
             : base(connection, compiler, table) { }
 
+        public void Dispose()
+        {
+            if (QueryBuilderMultiple != null)
+            {
+                QueryBuilderMultiple.Dispose();
+            }
+            if (connection != null)
+            {
+                connection.Dispose();
+            }
+            connection = null;
+            compiler = null;
+            GC.SuppressFinalize(this);
+        }
         #endregion Construct
 
         #region SoftQueryDapperExtensions
@@ -155,5 +169,19 @@ namespace Canducci.SqlKata.Dapper
         #endregion
 
         #endregion SoftQueryDapperExtensions
+
+        #region QueryBuilderMultiple        
+
+        private QueryBuilderMultiple QueryBuilderMultiple { get; set; }
+
+        public QueryBuilderMultiple QueryBuilderMultipleCollection()
+        {
+            if (QueryBuilderMultiple == null)
+            {
+                QueryBuilderMultiple = new QueryBuilderMultiple(connection, compiler);
+            }
+            return QueryBuilderMultiple;
+        }        
+        #endregion
     }
 }

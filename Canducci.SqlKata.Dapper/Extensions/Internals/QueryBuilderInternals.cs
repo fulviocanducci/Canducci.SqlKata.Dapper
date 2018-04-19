@@ -23,11 +23,11 @@ namespace Canducci.SqlKata.Dapper.Extensions.Internals
             throw new NotSupportedException("Only instances QueryBuilderSoftDapper.");
         }
 
-        internal static QueryBuilderMultiple AsQueryBuilderMultiple(this Query query)
-        {
-            if (query is QueryBuilderMultiple queryBuilderMultiple)
-                return queryBuilderMultiple;
-            throw new NotSupportedException("Only instances QueryBuilderMultiple.");
-        }
+        //internal static QueryBuilderMultiple AsQueryBuilderMultiple(this Query query)
+        //{
+        //    if (query is QueryBuilderMultiple queryBuilderMultiple)
+        //        return queryBuilderMultiple;
+        //    throw new NotSupportedException("Only instances QueryBuilderMultiple.");
+        //}
     }
 }

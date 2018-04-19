@@ -4,49 +4,74 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Dapper;
+using static Dapper.SqlMapper;
 using System.Threading.Tasks;
-using System.Collections;
+using System.Text;
 
 namespace Canducci.SqlKata.Dapper
 {
-    public class QueryBuilderMultiple: QueryBuilder
+    public class QueryBuilderMultiple: IDisposable
     {
-        private IDictionary<int, KeyValuePair<Type, Query>> Querys { get; }        
+        private IList<Query> Queries { get; set; }
+        private IDbConnection Connection { get; }
+        private Compiler Compiler { get; }
 
-        public QueryBuilderMultiple(IDbConnection connection, Compiler compiler)
-            : base(connection, compiler)
+        public QueryBuilderMultiple(IDbConnection connection, Compiler compiler)            
         {
-            if (Querys == null)
-                Querys = new Dictionary<int, KeyValuePair<Type, Query>>();
+            Clear();
+            Connection = connection;
+            Compiler = compiler;
         }
 
-        public QueryBuilderMultiple AddQuery<T>(Func<Query, Query> item)
-        {
-            Query query = new Query();
-            Querys.Add(Querys.Count, new KeyValuePair<Type, Query>(typeof(T), item(query)));
+        public QueryBuilderMultiple AddQuery(Func<Query, Query> item)
+        {            
+            Queries.Add(item(new Query()));
             return this;
         }
 
-        public IEnumerable Results(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public GridReader Results(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = Compiler(Querys);
-            SqlMapper.GridReader gridReader = connection.QueryMultiple(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
-            foreach (var q in Querys)
-            {
-                yield return gridReader.Read(q.Value.Key, true);
-            }
+            SqlResult result = CompilerListQueries(Queries);
+            Clear();
+            return Connection.QueryMultiple(result.Sql, result.Bindings, transaction, commandTimeout, commandType);            
         }
 
-        //public async Task<dynamic> ResultsAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-        //{            
-        //    SqlResult result = Compiler(Querys);
-        //    SqlMapper.GridReader gridReader = await connection.QueryMultipleAsync(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
-            
-        //    foreach(var q in Querys)
-        //    {
-        //        var t = System.Tuple.Create(gridReader.Read(q.Value.Key, true));
-        //        t.
-        //    }
-        //}
+        public async Task<GridReader> ResultsAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            SqlResult result = CompilerListQueries(Queries);
+            Clear();
+            return await Connection.QueryMultipleAsync(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
+        }
+
+        public void Clear()
+        {
+            if (Queries == null)
+                Queries = new List<Query>();
+            else
+                Queries.Clear();
+        }
+
+        protected SqlResult CompilerListQueries(IList<Query> items)
+        {
+            StringBuilder sqls = new StringBuilder();
+            List<object> bindings = new List<object>();
+            if (items.Count > 0)
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    var result = Compiler.Compile(items[i]);
+                    if (sqls.Length > 0) sqls.Append(";");
+                    sqls.Append(result.RawSql);
+                    bindings.AddRange(result.RawBindings);
+                }
+            }
+            return new SqlResult(sqls.ToString(), bindings);
+        }
+
+        public void Dispose()
+        {
+            Connection?.Dispose();            
+            GC.SuppressFinalize(this);
+        }
     }
 }

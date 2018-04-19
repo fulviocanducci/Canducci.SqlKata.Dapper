@@ -2,9 +2,9 @@
 
   <PropertyGroup>    	
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
+    <Version>1.0.3.1</Version>
+    <AssemblyVersion>1.0.3.1</AssemblyVersion>
+    <FileVersion>1.0.3.1</FileVersion>
     <PackageLicenseUrl></PackageLicenseUrl>
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>    
@@ -16,7 +16,8 @@
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
     <PackageTags>SqlKata Dapper SQL PostGres MySql SqlServer</PackageTags>
     <PackageReleaseNotes>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper
-https://sqlkata.com/docs</PackageReleaseNotes>
+https://sqlkata.com/docs
+AddCollectionQuery Many Results</PackageReleaseNotes>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
   </PropertyGroup>
 

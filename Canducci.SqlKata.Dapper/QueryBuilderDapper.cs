@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using static Dapper.SqlMapper;
 namespace Canducci.SqlKata.Dapper
 {
-    public partial class QueryBuilderDapper : QueryBuilder
+    public partial class QueryBuilderDapper : QueryBuilder, IDisposable
     {
         #region Construct
 
@@ -17,6 +17,17 @@ namespace Canducci.SqlKata.Dapper
 
         public QueryBuilderDapper(IDbConnection connection, Compiler compiler, string table) 
             : base(connection, compiler, table) { }
+
+        public void Dispose()
+        {
+            if (connection != null)
+            {
+                connection.Dispose();
+            }
+            connection = null;
+            compiler = null;            
+            GC.SuppressFinalize(this);
+        }
 
         #endregion Construct
 
@@ -290,7 +301,7 @@ namespace Canducci.SqlKata.Dapper
             return connection.QuerySingleOrDefaultAsync<T>(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
         }
 
-        #endregion MethodsDapper        
+        #endregion
 
     }
 }

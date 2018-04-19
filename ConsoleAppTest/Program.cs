@@ -12,6 +12,7 @@ using Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
+using static Dapper.SqlMapper;
 
 namespace ConsoleAppTest
 {
@@ -20,34 +21,30 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
 
-            //MYSQLSERVER TEST
-            //string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";
-            //Compiler compiler = new MySqlCompiler();
-
+           
             //SQLSERVER TEST
             string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;MultipleActiveResultSets=true;";
             Compiler compiler = new SqlServerCompiler();
-
-            //POSTGRESQL TEST
-            //string strConnection = "Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=senha;";                        
-            //Compiler compiler = new PostgresCompiler();
-
-            //using (MySqlConnection connection = new MySqlConnection(strConnection))
             
             using (IDbConnection connection = new SqlConnection(strConnection))
             {
-                var c = new QueryBuilderMultiple(connection, compiler);
-                
-                var r = c
-                    .AddQuery<People>(x => x.From("People").OrderBy("Id"))
-                    .AddQuery<Credit>(x => x.From("Credit").OrderBy("Id"))
-                    .AddQuery<People>(x => x.From("People").Where("Id", 1))
-                    .AddQuery<int>(x => x.From("People").AsCount())
+                var c = new QueryBuilderSoftDapper(connection, compiler);
+
+                var reader = c.QueryBuilderMultipleCollection();
+                    .AddQuery(x => x.From("People").OrderBy("Id"))
+                    .AddQuery(x => x.From("Credit").OrderBy("Id"))
+                    .AddQuery(x => x.From("People").Where("Id", 1))
+                    .AddQuery(x => x.From("People").AsCount())
                     .Results();
-                IEnumerator ie = r.GetEnumerator(); ie.MoveNext();
-                var source = (List<object>)ie.Current;
-                var pe = source[0] as People;
+
+                IList<People> peoples0 = reader.Read<People>().ToList();
+                IList<Credit> credit0 = reader.Read<Credit>().ToList();
+                People peoples1 = reader.ReadFirst<People>();
+                int count = reader.ReadFirst<int>();
+
+
                 var b = 10;
+
                 //var peoples = r.Read<People>();
                 //var credits = r.Read<Credit>();
                 //int countPeople = r.ReadFirst<int>();
