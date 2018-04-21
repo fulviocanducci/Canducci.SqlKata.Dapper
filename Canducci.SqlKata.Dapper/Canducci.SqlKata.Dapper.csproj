@@ -21,11 +21,18 @@ AddCollectionQuery Many Results</PackageReleaseNotes>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
   </PropertyGroup>
 
+ 
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.4" />
     <PackageReference Include="SqlKata" Version="1.0.0-beta-458" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
+  </ItemGroup>
+
+ 
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup> 
   
 </Project>

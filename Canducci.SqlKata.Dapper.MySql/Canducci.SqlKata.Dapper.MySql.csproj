@@ -22,7 +22,7 @@ https://sqlkata.com/docs</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.3.2" />
+    <ProjectReference Include="..\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.csproj" />
   </ItemGroup>
 
 </Project>

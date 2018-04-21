@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Data.SqlClient;
-using Canducci.SqlKata.Dapper;
-using Canducci.SqlKata.Dapper.Extensions;
-//using Canducci.SqlKata.Dapper.Extensions.Builder;
-//using Canducci.SqlKata.Dapper.Extensions.SoftBuilder;
-using Canducci.SqlKata.Dapper.Extensions.MultipleBuilder;
 using System.Data;
 using SqlKata.Compilers;
-using SqlKata;
+using Canducci.SqlKata.Dapper.MySql;
+using MySql.Data.MySqlClient;
+using Canducci.SqlKata.Dapper;
 using Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Collections;
-using static Dapper.SqlMapper;
 
 namespace ConsoleAppTest
 {
@@ -21,52 +14,33 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
 
-           
-            //SQLSERVER TEST
-            string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;MultipleActiveResultSets=true;";
-            Compiler compiler = new SqlServerCompiler();
-            
-            using (IDbConnection connection = new SqlConnection(strConnection))
+
+            //MYSQLSERVER TEST
+            string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";            
+
+            using (IDbConnection connection = new MySqlConnection(strConnection))
             {
-                var c = new QueryBuilderSoftDapper(connection, compiler);
+                People p = connection
+                    .Query()
+                    .From("people")
+                    .Where("id", 1)
+                    .First<People>();
 
-                var reader = c.QueryBuilderMultipleCollection();
-                    .AddQuery(x => x.From("People").OrderBy("Id"))
-                    .AddQuery(x => x.From("Credit").OrderBy("Id"))
-                    .AddQuery(x => x.From("People").Where("Id", 1))
-                    .AddQuery(x => x.From("People").AsCount())
-                    .Results();
+                var listPeople = connection
+                    .Query("people")
+                    .OrderBy("name")
+                    .List<People>();
 
-                IList<People> peoples0 = reader.Read<People>().ToList();
-                IList<Credit> credit0 = reader.Read<Credit>().ToList();
-                People peoples1 = reader.ReadFirst<People>();
-                int count = reader.ReadFirst<int>();
+                var result = connection
+                        .InsertFrom("people")
+                        .Set("name", "Salvando de novo")
+                        .SetNull("created")
+                        .Set("active", true)
+                        .Save();
 
-
-                var b = 10;
-
-                //var peoples = r.Read<People>();
-                //var credits = r.Read<Credit>();
-                //int countPeople = r.ReadFirst<int>();
-
-                //var result = c.AddQuery<Credit>(x =>
-                //    x.From("Credit")
-                //        .AsInsert(new Dictionary<string, object>
-                //        {
-                //            ["Description"] = "Testando 123",
-                //            ["Created"] = DateTime.Now.AddDays(-1)
-                //        })
-                //    )
-                //    .AddQuery<Credit>(x =>
-                //    x.From("Credit")
-                //        .AsInsert(new Dictionary<string, object>
-                //        {
-                //            ["Description"] = "Testando 345",
-                //            ["Created"] = DateTime.Now.AddDays(-2)
-                //        }))
-                //        .Results();
-
-
+                connection.Insert()
+                    .From("")
+                    
 
             }
 
@@ -138,7 +112,43 @@ namespace ConsoleAppTest
 
                 //Console.WriteLine($"Resultado: {result.ToString()}");
 
+                //var c = new QueryBuilderSoftDapper(connection, compiler);
 
+                //var reader = c.QueryBuilderMultipleCollection();
+                //    .AddQuery(x => x.From("People").OrderBy("Id"))
+                //    .AddQuery(x => x.From("Credit").OrderBy("Id"))
+                //    .AddQuery(x => x.From("People").Where("Id", 1))
+                //    .AddQuery(x => x.From("People").AsCount())
+                //    .Results();
+
+                //IList<People> peoples0 = reader.Read<People>().ToList();
+                //IList<Credit> credit0 = reader.Read<Credit>().ToList();
+                //People peoples1 = reader.ReadFirst<People>();
+                //int count = reader.ReadFirst<int>();
+
+
+                //var b = 10;
+
+                //var peoples = r.Read<People>();
+                //var credits = r.Read<Credit>();
+                //int countPeople = r.ReadFirst<int>();
+
+                //var result = c.AddQuery<Credit>(x =>
+                //    x.From("Credit")
+                //        .AsInsert(new Dictionary<string, object>
+                //        {
+                //            ["Description"] = "Testando 123",
+                //            ["Created"] = DateTime.Now.AddDays(-1)
+                //        })
+                //    )
+                //    .AddQuery<Credit>(x =>
+                //    x.From("Credit")
+                //        .AsInsert(new Dictionary<string, object>
+                //        {
+                //            ["Description"] = "Testando 345",
+                //            ["Created"] = DateTime.Now.AddDays(-2)
+                //        }))
+                //        .Results();
             }
         }
     }

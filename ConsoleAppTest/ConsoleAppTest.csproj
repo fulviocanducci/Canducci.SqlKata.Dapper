@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.csproj" />
+    <ProjectReference Include="..\Canducci.SqlKata.Dapper.MySql\Canducci.SqlKata.Dapper.MySql.csproj" />
   </ItemGroup>
 
 </Project>

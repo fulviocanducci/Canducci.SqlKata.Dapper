@@ -1,38 +1,26 @@
-﻿using SqlKata;
+﻿using Canducci.SqlKata.Dapper.Base;
+using SqlKata;
 using SqlKata.Compilers;
-using System;
 using System.Data;
-
 namespace Canducci.SqlKata.Dapper
 {
-    public abstract class QueryBuilder: Query
+    public partial class QueryBuilder : BaseBuilderQuery
     {
-        protected IDbConnection connection;
-        protected Compiler compiler;
-        public QueryBuilder(IDbConnection connection, Compiler compiler)
+        public QueryBuilder(IDbConnection connection, Compiler compiler) 
+            : base(connection, compiler)
         {
-            Init(connection, compiler);
         }
 
-        public QueryBuilder(IDbConnection connection, Compiler compiler, string table)
-            : base(table)
-        {
-            Init(connection, compiler);
+        public QueryBuilder(IDbConnection connection, Compiler compiler, string table) 
+            : base(connection, compiler, table)
+        {            
         }
 
         #region Compiler
         protected SqlResult Compiler()
         {
             return compiler.Compile(this);
-        }        
-        #endregion
-
-        #region Init
-        protected void Init(IDbConnection connection, Compiler compiler)
-        {
-            this.connection = connection ?? throw new ArgumentNullException(nameof(connection));
-            this.compiler = compiler ?? throw new ArgumentNullException(nameof(compiler));
         }
-        #endregion Init
+        #endregion
     }
 }
