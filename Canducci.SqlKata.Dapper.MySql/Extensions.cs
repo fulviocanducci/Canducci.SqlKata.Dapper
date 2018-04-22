@@ -13,7 +13,14 @@ namespace Canducci.SqlKata.Dapper.MySql
         public static InsertBuilder Insert(this IDbConnection connection)
            => new InsertBuilder(connection, new MySqlCompiler());
 
-        public static InsertBuilder InsertFrom(this IDbConnection connection, string table)
+        public static InsertBuilder Insert(this IDbConnection connection, string table)
             => new InsertBuilder(connection, new MySqlCompiler(), table);
+
+        public static T Insert<T>(this IDbConnection connection, T model)
+        {
+            InsertObject<T> insert = new InsertObject<T>(connection, new MySqlCompiler(), model);
+            return insert.Save();
+            
+        }
     }
 }

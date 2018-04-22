@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Dapper;
 using SqlKata;
-
 namespace Canducci.SqlKata.Dapper
 {
     public partial class QueryBuilder

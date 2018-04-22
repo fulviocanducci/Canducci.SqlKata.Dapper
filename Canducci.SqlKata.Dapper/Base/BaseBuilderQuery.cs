@@ -6,11 +6,13 @@ namespace Canducci.SqlKata.Dapper.Base
 {
     public abstract class BaseBuilderQuery : Query
     {
+        #region properties
         protected IDbConnection connection;
-        protected Compiler compiler;        
+        protected Compiler compiler;
+        #endregion
 
+        #region construct
         public BaseBuilderQuery(IDbConnection connection, Compiler compiler)
-            :base()
         {
             Init(connection, compiler);
         }
@@ -20,12 +22,11 @@ namespace Canducci.SqlKata.Dapper.Base
         {
             Init(connection, compiler);
         }
+        #endregion
 
         #region Compiler
-        protected SqlResult Compiler(Query query)
-        {
-            return compiler.Compile(query);
-        }
+        protected SqlResult Compiler(Query query) 
+            => compiler.Compile(query);
         #endregion
 
         #region Init

@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 namespace Canducci.SqlKata.Dapper
 {
     public static class QueryBuilderExtensions
-    {
-        
+    {        
         #region Query_To_QueryBuilder
         internal static QueryBuilder AsQueryBuilder(this Query query)
         {

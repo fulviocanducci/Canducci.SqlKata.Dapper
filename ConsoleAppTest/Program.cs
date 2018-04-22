@@ -19,8 +19,8 @@ namespace ConsoleAppTest
             string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";            
 
             using (IDbConnection connection = new MySqlConnection(strConnection))
-            {
-                People p = connection
+            {                
+                People p0 = connection
                     .Query()
                     .From("people")
                     .Where("id", 1)
@@ -31,17 +31,24 @@ namespace ConsoleAppTest
                     .OrderBy("name")
                     .List<People>();
 
-                var result = connection
-                        .InsertFrom("people")
-                        .Set("name", "Salvando de novo")
-                        .SetNull("created")
-                        .Set("active", true)
-                        .Save();
+                //var result0 = connection
+                //        .Insert("people")
+                //        .Set("name", "Salvando de novo")
+                //        .SetNull("created")
+                //        .Set("active", true)
+                //        .Save();
 
-                connection.Insert()
-                    .From("")
-                    
+                //var result1 = connection
+                //    .Insert("people")
+                //    .Set(new { name = "Salomão", created = default(DateTime?), active = true })
+                //    .Save();
 
+                People p = new People();
+                p.Active = true;
+                p.Created = DateTime.Now.AddDays(-200);
+                p.Name = "Milena Fouston Rodrigues";
+
+                var result2 = connection.Insert(p);             
             }
 
             Console.WriteLine("");

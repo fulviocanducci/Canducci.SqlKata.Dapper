@@ -6,6 +6,7 @@ namespace Canducci.SqlKata.Dapper
 {
     public partial class QueryBuilder : BaseBuilderQuery
     {
+        #region construct
         public QueryBuilder(IDbConnection connection, Compiler compiler) 
             : base(connection, compiler)
         {
@@ -15,10 +16,11 @@ namespace Canducci.SqlKata.Dapper
             : base(connection, compiler, table)
         {            
         }
+        #endregion  
 
         #region Compiler
         protected SqlResult Compiler()
-        {
+        {            
             return compiler.Compile(this);
         }
         #endregion
