@@ -13,14 +13,14 @@ namespace Canducci.SqlKata.Dapper
     public sealed class UpdateBuilder : BaseBuilder
     {
         #region properties
-        private Dictionary<string, object> Items;
-        private Query Query;
+        private Dictionary<string, object> Items { get; set; }        
         #endregion
 
         #region construct
         public UpdateBuilder(IDbConnection connection, Compiler compiler)
             : base(connection, compiler)
         {
+            InitUpdateBuilder(null);
         }
         public UpdateBuilder(IDbConnection connection, Compiler compiler, string table)
             : base(connection, compiler)
@@ -161,8 +161,8 @@ namespace Canducci.SqlKata.Dapper
             {
 
             }
-            SqlResult compiler = Compiler(Query.AsUpdate(Items));
-            return connection.Execute(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile(Query.AsUpdate(Items));
+            return Connection.Execute(compiler.Sql, compiler.Bindings);
         }
 
         public Task<int> SaveAsync()
@@ -171,8 +171,8 @@ namespace Canducci.SqlKata.Dapper
             {
 
             }
-            SqlResult compiler = Compiler(Query.AsUpdate(Items));
-            return connection.ExecuteAsync(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile(Query.AsUpdate(Items));
+            return Connection.ExecuteAsync(compiler.Sql, compiler.Bindings);
         }
         #endregion
     }

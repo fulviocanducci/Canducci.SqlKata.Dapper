@@ -7,33 +7,38 @@ namespace Canducci.SqlKata.Dapper.Base
     public abstract class BaseBuilder: IDisposable
     {
         #region properties
-        protected IDbConnection connection;
-        protected Compiler compiler;
+        protected IDbConnection Connection { get; set; }
+        protected Compiler Compiler { get; set; }
+        protected Query Query { get; set; }
         #endregion
 
         #region construct
         public BaseBuilder(IDbConnection connection, Compiler compiler)
-            => Init(connection, compiler);
+        {
+            InitBaseBuilder(connection, compiler);
+        }
         #endregion
 
         #region Compiler
-        protected SqlResult Compiler(Query query)
-            => compiler.Compile(query);
+        protected virtual SqlResult Compile(Query query)
+        {
+            return Compiler.Compile(query);
+        }
         #endregion
 
         #region Init
-        protected void Init(IDbConnection connection, Compiler compiler)
+        protected void InitBaseBuilder(IDbConnection connection, Compiler compiler)
         {
-            this.connection = connection ?? throw new ArgumentNullException(nameof(connection));
-            this.compiler = compiler ?? throw new ArgumentNullException(nameof(compiler));
+            Connection = connection ?? throw new ArgumentNullException(nameof(Connection));
+            Compiler = compiler ?? throw new ArgumentNullException(nameof(Compiler));            
         }
         #endregion Init
 
         #region dispose
         public void Dispose()
         {
-            connection?.Dispose();
-            compiler = null;
+            Connection?.Dispose();
+            Compiler = null;
             GC.SuppressFinalize(this);
         }
         #endregion

@@ -7,13 +7,13 @@ namespace Canducci.SqlKata.Dapper
     {
         public T First<T>()
         {
-            SqlResult compiler = Compiler();
-            return connection.QueryFirstOrDefault<T>(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile();
+            return Connection.QueryFirstOrDefault<T>(compiler.Sql, compiler.Bindings);
         }
         public Task<T> FirstAsync<T>()
         {
-            SqlResult compiler = Compiler();
-            return connection.QueryFirstOrDefaultAsync<T>(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile();
+            return Connection.QueryFirstOrDefaultAsync<T>(compiler.Sql, compiler.Bindings);
         }
     }
 }

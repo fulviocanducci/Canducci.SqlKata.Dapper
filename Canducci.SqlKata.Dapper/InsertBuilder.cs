@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using SqlKata.Compilers;
 using Dapper;
@@ -13,15 +12,14 @@ namespace Canducci.SqlKata.Dapper
     public sealed class InsertBuilder : BaseBuilder
     {
         #region properties
-        private Dictionary<string, object> Items;        
-        private Query Query;
+        private Dictionary<string, object> Items { get; set; }
         #endregion
 
         #region construct
         public InsertBuilder(IDbConnection connection, Compiler compiler) 
             : base(connection, compiler)
         {
-            InitInsertBuilder();            
+            InitInsertBuilder(null);            
         }
 
         public InsertBuilder(IDbConnection connection, Compiler compiler, string table) 
@@ -32,7 +30,7 @@ namespace Canducci.SqlKata.Dapper
         #endregion
 
         #region utils
-        private void InitInsertBuilder(string table = "")
+        private void InitInsertBuilder(string table)
         {
             if (Items == null)
             {
@@ -114,8 +112,8 @@ namespace Canducci.SqlKata.Dapper
             {
                 
             }
-            SqlResult compiler = Compiler(Query.AsInsert(Items));
-            return connection.Execute(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile(Query.AsInsert(Items));
+            return Connection.Execute(compiler.Sql, compiler.Bindings);
         }
 
         public Task<int> SaveAsync()
@@ -124,8 +122,8 @@ namespace Canducci.SqlKata.Dapper
             {
 
             }
-            SqlResult compiler = Compiler(Query.AsInsert(Items));
-            return connection.ExecuteAsync(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile(Query.AsInsert(Items));
+            return Connection.ExecuteAsync(compiler.Sql, compiler.Bindings);
         }
         #endregion
     }

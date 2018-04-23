@@ -7,33 +7,35 @@ namespace Canducci.SqlKata.Dapper.Base
     public abstract class BaseBuilderQuery : Query
     {
         #region properties
-        protected IDbConnection connection;
-        protected Compiler compiler;
+        protected IDbConnection Connection { get; set; }
+        protected Compiler Compiler { get; set; }
         #endregion
 
         #region construct
         public BaseBuilderQuery(IDbConnection connection, Compiler compiler)
         {
-            Init(connection, compiler);
+            InitBaseBuilderQuery(connection, compiler);
         }
 
         public BaseBuilderQuery(IDbConnection connection, Compiler compiler, string table)
             :base(table)
         {
-            Init(connection, compiler);
+            InitBaseBuilderQuery(connection, compiler);
         }
         #endregion
 
         #region Compiler
-        protected SqlResult Compiler(Query query) 
-            => compiler.Compile(query);
+        protected virtual SqlResult Compile(Query query)
+        {
+            return Compiler.Compile(query);
+        }
         #endregion
 
         #region Init
-        protected void Init(IDbConnection connection, Compiler compiler)
+        protected void InitBaseBuilderQuery(IDbConnection connection, Compiler compiler)
         {
-            this.connection = connection ?? throw new ArgumentNullException(nameof(connection));
-            this.compiler = compiler ?? throw new ArgumentNullException(nameof(compiler));
+            Connection = connection ?? throw new ArgumentNullException(nameof(Connection));
+            Compiler = compiler ?? throw new ArgumentNullException(nameof(Compiler));
         }
         #endregion Init
     }

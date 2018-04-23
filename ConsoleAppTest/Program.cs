@@ -77,21 +77,21 @@ namespace ConsoleAppTest
                 //    Name = "Sr. Riston Rockets"
                 //};
 
-                //Credit cr = new Credit
-                //{
-                //    Created = null,
-                //    Description = "Datena Novo Programa null Created"
-                //};
+                Credit cr = new Credit
+                {
+                    Created = null,
+                    Description = "Datena Novo Programa null Created 123"
+                };
 
-                //Notice nt = new Notice
-                //{
-                //    Id = Guid.NewGuid().ToString(),
-                //    Text = "Text 10",
-                //    Title = "Title 10"
-                //};
+                Notice nt = new Notice
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Text = "Text 101",
+                    Title = "Title 101"
+                };
 
-                //nt = connection.Insert(nt);
-                //cr = connection.Insert(cr);
+                nt = connection.Insert(nt);
+                cr = connection.Insert(cr);
 
                 //Car c = new Car
                 //{

@@ -11,8 +11,7 @@ namespace Canducci.SqlKata.Dapper
     public abstract class InsertObjectBase<T>: BaseBuilder
     {
         #region properties
-        private T Model { get; }        
-        private Query Query;
+        protected T Model { get; set; }                
         #endregion
 
         #region abstract_method
@@ -23,10 +22,18 @@ namespace Canducci.SqlKata.Dapper
         internal InsertObjectBase(IDbConnection connection, Compiler compiler)
             : base(connection, compiler)
         {
+            InitInsertObjectBase(default(T));
         }
 
         public InsertObjectBase(IDbConnection connection, Compiler compiler, T model) 
             : base(connection, compiler)
+        {
+            InitInsertObjectBase(model);
+        }
+        #endregion
+
+        #region utils
+        private void InitInsertObjectBase(T model)
         {
             Model = model;
             if (Query == null)
@@ -39,21 +46,17 @@ namespace Canducci.SqlKata.Dapper
         #region save
         public T Save()
         {
-            DescribeObject<T> describe = DescribeObject<T>.Create(Model);
-            
-            SqlResult compiler = Compiler(Query.From(describe.TableFrom.Name).AsInsert(describe.Items));
-            string Sql = compiler.Sql + 
-                ((describe.IsAutoIncrement) 
-                ? GetCommandSqlGeneratedId(describe.IdName) 
-                : "");
+            DescribeObject<T> describe = DescribeObject<T>.Create(Model);            
+            SqlResult compiler = Compile(Query.From(describe.TableFrom.Name).AsInsert(describe.Items));
+            string Sql = compiler.Sql + ((describe.IsAutoIncrement) ? GetCommandSqlGeneratedId(describe.IdName) : "");
             if (describe.IsAutoIncrement)
             {
-                object value = connection.ExecuteScalar(Sql, compiler.Bindings);
+                object value = Connection.ExecuteScalar(Sql, compiler.Bindings);
                 describe.Id.SetValue(describe.Model, Convert.ChangeType(value, describe.IdType));
             }
             else
             {
-                if (connection.Execute(Sql, compiler.Bindings) == 0)
+                if (Connection.Execute(Sql, compiler.Bindings) == 0)
                 {
                     throw new Exception("No insert row");
                 }

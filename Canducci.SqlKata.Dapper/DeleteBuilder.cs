@@ -11,15 +11,16 @@ namespace Canducci.SqlKata.Dapper
     public sealed class DeleteBuilder : BaseBuilder
     {
         #region properties
-        //private Dictionary<string, object> Items;
-        private Query Query;
+        //private Dictionary<string, object> Items { get; set; }
         #endregion
 
         #region construct
         public DeleteBuilder(IDbConnection connection, Compiler compiler) 
             : base(connection, compiler)
         {
+            InitDeleteBuilder(null);
         }
+
         public DeleteBuilder(IDbConnection connection, Compiler compiler, string table)
             : base(connection, compiler)
         {
@@ -107,14 +108,14 @@ namespace Canducci.SqlKata.Dapper
         #region save
         public int Save()
         {            
-            SqlResult compiler = Compiler(Query.AsDelete());
-            return connection.Execute(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile(Query.AsDelete());
+            return Connection.Execute(compiler.Sql, compiler.Bindings);
         }
 
         public Task<int> SaveAsync()
         {           
-            SqlResult compiler = Compiler(Query.AsDelete());
-            return connection.ExecuteAsync(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile(Query.AsDelete());
+            return Connection.ExecuteAsync(compiler.Sql, compiler.Bindings);
         }
         #endregion
 

@@ -8,14 +8,14 @@ namespace Canducci.SqlKata.Dapper
     {
         public IEnumerable<T> List<T>()
         {
-            SqlResult compiler = Compiler();
-            return connection.Query<T>(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile();
+            return Connection.Query<T>(compiler.Sql, compiler.Bindings);
         }
 
         public Task<IEnumerable<T>> ListAsync<T>()
         {
-            SqlResult compiler = Compiler();
-            return connection.QueryAsync<T>(compiler.Sql, compiler.Bindings);
+            SqlResult compiler = Compile();
+            return Connection.QueryAsync<T>(compiler.Sql, compiler.Bindings);
         }
     }
 }

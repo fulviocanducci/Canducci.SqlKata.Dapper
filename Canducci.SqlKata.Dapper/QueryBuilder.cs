@@ -18,10 +18,10 @@ namespace Canducci.SqlKata.Dapper
         }
         #endregion  
 
-        #region Compiler
-        protected SqlResult Compiler()
+        #region Compiler        
+        protected virtual SqlResult Compile()
         {            
-            return compiler.Compile(this);
+            return Compiler.Compile(this);
         }
         #endregion
     }
