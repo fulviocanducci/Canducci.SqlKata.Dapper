@@ -39,5 +39,12 @@ namespace Canducci.SqlKata.Dapper.Postgres
             UpdateObject<T> update = new UpdateObject<T>(connection, new PostgresCompiler(), model);
             return update.Save();
         }
+
+        public static bool Delete<T>(this IDbConnection connection, T model)
+        {
+            DeleteObject<T> update = new DeleteObject<T>(connection, new PostgresCompiler(), model);
+            return update.Save();
+        }
+
     }
 }

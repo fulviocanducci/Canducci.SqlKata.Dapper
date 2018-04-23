@@ -9,13 +9,8 @@ namespace Canducci.SqlKata.Dapper.MySql
         {
         }
 
-        // Mysql Last_Insert_Id()
         protected override string GetCommandSqlGeneratedId(params object[] values)
-        {
-            //if (type.GetType() == typeof(System.Guid))
-            //{
-            //    return ";SELECT uuid();";
-            //}
+        {        
             return ";SELECT CAST(LAST_INSERT_ID() AS SIGNED);";
         }
     }

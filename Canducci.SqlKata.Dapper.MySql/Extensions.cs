@@ -36,7 +36,13 @@ namespace Canducci.SqlKata.Dapper.MySql
 
         public static bool Update<T>(this IDbConnection connection, T model)
         {
-            UpdateObject<T> update = new UpdateObject<T>(connection, new MySqlCompiler(), model);
+            UpdateObject<T> update = new UpdateObject<T>(connection, new MySqlCompiler(), model);            
+            return update.Save();
+        }
+
+        public static bool Delete<T>(this IDbConnection connection, T model)
+        {
+            DeleteObject<T> update = new DeleteObject<T>(connection, new MySqlCompiler(), model);
             return update.Save();
         }
     }

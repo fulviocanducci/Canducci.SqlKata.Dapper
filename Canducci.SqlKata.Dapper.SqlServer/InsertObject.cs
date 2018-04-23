@@ -9,7 +9,6 @@ namespace Canducci.SqlKata.Dapper.SqlServer
         {
         }
 
-        // SqlServer SCOPE_IDENTITY()
         protected override string GetCommandSqlGeneratedId(params object[] values)
         {
             //;SELECT CAST(SCOPE_IDENTITY() AS INT);

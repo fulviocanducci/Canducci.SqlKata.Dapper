@@ -3,7 +3,6 @@ using Dapper;
 using SqlKata;
 using SqlKata.Compilers;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 namespace Canducci.SqlKata.Dapper

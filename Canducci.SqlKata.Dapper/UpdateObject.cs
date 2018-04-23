@@ -2,7 +2,7 @@
 using SqlKata.Compilers;
 using System.Data;
 
-namespace Canducci.SqlKata.Dapper.Postgres
+namespace Canducci.SqlKata.Dapper
 {
     internal sealed class UpdateObject<T> : UpdateObjectBase<T>
     {

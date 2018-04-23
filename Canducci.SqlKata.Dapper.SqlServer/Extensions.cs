@@ -39,5 +39,11 @@ namespace Canducci.SqlKata.Dapper.SqlServer
             UpdateObject<T> update = new UpdateObject<T>(connection, new SqlServerCompiler(), model);
             return update.Save();
         }
+
+        public static bool Delete<T>(this IDbConnection connection, T model)
+        {
+            DeleteObject<T> update = new DeleteObject<T>(connection, new SqlServerCompiler(), model);
+            return update.Save();
+        }
     }
 }

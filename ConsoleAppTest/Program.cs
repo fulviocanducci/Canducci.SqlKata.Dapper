@@ -20,11 +20,12 @@ namespace ConsoleAppTest
 
             using (IDbConnection connection = new MySqlConnection(strConnection))
             {
-                //connection.Update("car")
-                //    .Set("description", "Escorte")
-                //    .Where("id", 5)
-                //    .Save();
+                var r = connection.Update("car")
+                    .Set("description", "Maverick")
+                    .Where("id", 2)
+                    .Save();
 
+                var a = 1;
                 //connection.Update("car")
                 //    .Set("description", "Parati")
                 //    .Where("id", 2)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 using System.Threading.Tasks;
 using Canducci.SqlKata.Dapper.Internals;
 using Dapper;
@@ -23,6 +19,7 @@ namespace Canducci.SqlKata.Dapper.Base
         {
             InitDeleteObjectBase(default(T));
         }
+
         public DeleteObjectBase(IDbConnection connection, Compiler compiler, T model)
             : base(connection, compiler)
         {

@@ -8,12 +8,11 @@ namespace Canducci.SqlKata.Dapper.Postgres
             : base(connection, compiler, model)
         {
         }
-
-        // Postgres RETURNING id
+        
         protected override string GetCommandSqlGeneratedId(params object[] values)
         {            
-            var strNameId = values.Length > 0 ? values[0] : "id";
-            return @";RETURNING {values[0]};";
+            object id = values.Length > 0 ? values[0] : "id";
+            return @";RETURNING {id};";
         }
     }
 }

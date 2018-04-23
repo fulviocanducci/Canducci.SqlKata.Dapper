@@ -2,9 +2,9 @@
 
   <PropertyGroup>    	
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3.2</Version>
-    <AssemblyVersion>1.0.3.2</AssemblyVersion>
-    <FileVersion>1.0.3.2</FileVersion>
+    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <PackageLicenseUrl></PackageLicenseUrl>
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>    
@@ -19,9 +19,7 @@
 https://sqlkata.com/docs
 AddCollectionQuery Many Results</PackageReleaseNotes>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
-  </PropertyGroup>
-
- 
+  </PropertyGroup> 
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.4" />
