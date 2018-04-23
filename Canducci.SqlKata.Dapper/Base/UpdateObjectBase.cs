@@ -7,7 +7,7 @@ using SqlKata.Compilers;
 
 namespace Canducci.SqlKata.Dapper.Base
 {
-    public abstract class UpdateObjectBase<T> : BaseBuilder
+    internal abstract class UpdateObjectBase<T> : BaseBuilder
     {
         #region properties
         protected T Model { get; set; }

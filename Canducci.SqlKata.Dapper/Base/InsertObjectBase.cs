@@ -8,7 +8,7 @@ using System.Data;
 using System.Threading.Tasks;
 namespace Canducci.SqlKata.Dapper
 {
-    public abstract class InsertObjectBase<T>: BaseBuilder
+    internal abstract class InsertObjectBase<T>: BaseBuilder
     {
         #region properties
         protected T Model { get; set; }                

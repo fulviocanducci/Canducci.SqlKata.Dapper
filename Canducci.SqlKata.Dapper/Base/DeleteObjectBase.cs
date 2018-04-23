@@ -7,7 +7,7 @@ using SqlKata.Compilers;
 
 namespace Canducci.SqlKata.Dapper.Base
 {
-    public abstract class DeleteObjectBase<T> : BaseBuilder
+    internal abstract class DeleteObjectBase<T> : BaseBuilder
     {
         #region properties
         protected T Model { get; set; }
