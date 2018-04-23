@@ -16,11 +16,22 @@ namespace Canducci.SqlKata.Dapper.MySql
         public static InsertBuilder Insert(this IDbConnection connection, string table)
             => new InsertBuilder(connection, new MySqlCompiler(), table);
 
+        public static UpdateBuilder Update(this IDbConnection connection)
+           => new UpdateBuilder(connection, new MySqlCompiler());
+
+        public static UpdateBuilder Update(this IDbConnection connection, string table)
+            => new UpdateBuilder(connection, new MySqlCompiler(), table);
+
+        public static DeleteBuilder Delete(this IDbConnection connection)
+           => new DeleteBuilder(connection, new MySqlCompiler());
+
+        public static DeleteBuilder Delete(this IDbConnection connection, string table)
+            => new DeleteBuilder(connection, new MySqlCompiler(), table);
+
         public static T Insert<T>(this IDbConnection connection, T model)
         {
             InsertObject<T> insert = new InsertObject<T>(connection, new MySqlCompiler(), model);
-            return insert.Save();
-            
+            return insert.Save();            
         }
     }
 }

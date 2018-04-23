@@ -1,25 +1,22 @@
 ﻿using Canducci.SqlKata.Dapper.Base;
+using Canducci.SqlKata.Dapper.Internals;
 using Dapper;
 using SqlKata;
 using SqlKata.Compilers;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Reflection;
 using System.Threading.Tasks;
-
 namespace Canducci.SqlKata.Dapper
 {
     public abstract class InsertObjectBase<T>: BaseBuilder
     {
         #region properties
-        private T Model { get; }
-        private Dictionary<string, object> Items;
+        private T Model { get; }        
         private Query Query;
         #endregion
 
         #region abstract_method
-        protected abstract string GetCommandSqlGeneratedId();
+        protected abstract string GetCommandSqlGeneratedId(params object[] values);
         #endregion
 
         #region construct
@@ -36,64 +33,50 @@ namespace Canducci.SqlKata.Dapper
             {
                 Query = new Query();
             }
-            if (Items == null)
-            {
-                Items = new Dictionary<string, object>();
-            }
-        }
-        #endregion
-
-        #region utils_methods
-        public SqlResult Generated(ref PropertyInfo Id)
-        {
-            Type type = Model.GetType();
-            TableFromAttribute tableFrom = type.GetTypeInfo().GetCustomAttribute<TableFromAttribute>();            
-            if (tableFrom != null)
-            {
-                Query.From(tableFrom.Name);
-            }
-            PropertyInfo[] properties = type.GetProperties();
-            foreach (PropertyInfo property in properties)
-            {
-                if (property.GetCustomAttribute(typeof(AutoIncrementAttribute)) == null)
-                {
-                    Items.Add(property.Name, property.GetValue(Model));
-                }
-                else
-                {
-                    Id = property;
-                }
-            }
-            return Compiler(Query.AsInsert(Items));
-        }
-
-        public void SetId(ref PropertyInfo Id, object value)
-        {
-            if (Id != null)
-            {
-                Id.SetValue(Model, Convert.ToInt32(value));
-            }
         }
         #endregion
 
         #region save
         public T Save()
         {
-            PropertyInfo Id = null;
-            var compiler = Generated(ref Id);
-            object value = connection.ExecuteScalar(compiler.Sql + GetCommandSqlGeneratedId(), compiler.Bindings);
-            SetId(ref Id, value);
+            DescribeObject<T> describe = DescribeObject<T>.Create(Model);
+            
+            SqlResult compiler = Compiler(Query.From(describe.TableFrom.Name).AsInsert(describe.Items));
+            string Sql = compiler.Sql + 
+                ((describe.IsAutoIncrement) 
+                ? GetCommandSqlGeneratedId(describe.IdName) 
+                : "");
+            if (describe.IsAutoIncrement)
+            {
+                object value = connection.ExecuteScalar(Sql, compiler.Bindings);
+                describe.Id.SetValue(describe.Model, Convert.ChangeType(value, describe.IdType));
+            }
+            else
+            {
+                if (connection.Execute(Sql, compiler.Bindings) == 0)
+                {
+                    throw new Exception("No insert row");
+                }
+            }            
             return Model;
         }
 
-        public async Task<T> SaveAsync()
-        {
-            PropertyInfo Id = null;
-            var compiler = Generated(ref Id);
-            object value = await connection.ExecuteScalarAsync(compiler.Sql + GetCommandSqlGeneratedId(), compiler.Bindings);
-            SetId(ref Id, value);
-            return Model;
-        }
+        //public async Task<T> SaveAsync()
+        //{
+        //    DescribeObject<T> describe = DescribeObject<T>.Create(Model);            
+        //    SqlResult compiler = Compiler(Query.From(describe.TableFrom.Name).AsInsert(describe.Items));
+        //    string Sql = compiler.Sql + ((describe.IsAutoIncrement) ? GetCommandSqlGeneratedId() : "");
+        //    if (describe.IsAutoIncrement)
+        //    {
+        //        object value = await connection.ExecuteScalarAsync(Sql, compiler.Bindings);
+        //        describe.Id.SetValue(describe.Model, Convert.ChangeType(value, describe.IdType));
+        //    }
+        //    else
+        //    {
+        //        await connection.ExecuteAsync(Sql, compiler.Bindings);
+        //    }            
+        //    return Model;
+        //}
         #endregion
     }
 }

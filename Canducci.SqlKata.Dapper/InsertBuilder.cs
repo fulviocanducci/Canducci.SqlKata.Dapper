@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 using Canducci.SqlKata.Dapper.Base;
 using System.Linq;
 using System.Reflection;
-
 namespace Canducci.SqlKata.Dapper
 {
-    public class InsertBuilder : BaseBuilder
+    public sealed class InsertBuilder : BaseBuilder
     {
         #region properties
         private Dictionary<string, object> Items;        
@@ -50,6 +49,14 @@ namespace Canducci.SqlKata.Dapper
         }
         #endregion
 
+        #region from
+        public InsertBuilder From(string table)
+        {
+            Query.From(table);
+            return this;
+        }
+        #endregion
+
         #region set
 
         public InsertBuilder Set<T>(string name, T value)
@@ -63,12 +70,6 @@ namespace Canducci.SqlKata.Dapper
             Items.Add(name, null);
             return this;
         }   
-        
-        public InsertBuilder From(string table)
-        {
-            Query.From(table);
-            return this;
-        }
 
         public InsertBuilder Set(IReadOnlyDictionary<string, object> data)
         {
@@ -104,7 +105,7 @@ namespace Canducci.SqlKata.Dapper
             return this;
         }
 
-#endregion
+        #endregion
 
         #region save
         public int Save()

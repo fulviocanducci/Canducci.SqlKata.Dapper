@@ -1,20 +1,37 @@
 ﻿using SqlKata.Compilers;
 using System.Data;
-
 namespace Canducci.SqlKata.Dapper.SqlServer
 {
     public static class Extensions
     {
-        public static QueryBuilderDapper Build(this IDbConnection connection)
-            => new QueryBuilderDapper(connection, new SqlServerCompiler());
+        public static QueryBuilder Query(this IDbConnection connection)
+            => new QueryBuilder(connection, new SqlServerCompiler());
 
-        public static QueryBuilderDapper Build(this IDbConnection connection, string table)
-            => new QueryBuilderDapper(connection, new SqlServerCompiler(), table);
+        public static QueryBuilder Query(this IDbConnection connection, string table)
+            => new QueryBuilder(connection, new SqlServerCompiler(), table);
 
-        public static QueryBuilderSoftDapper SoftBuild(this IDbConnection connection)
-            => new QueryBuilderSoftDapper(connection, new SqlServerCompiler());
+        public static InsertBuilder Insert(this IDbConnection connection)
+           => new InsertBuilder(connection, new SqlServerCompiler());
 
-        public static QueryBuilderSoftDapper SoftBuild(this IDbConnection connection, string table)
-            => new QueryBuilderSoftDapper(connection, new SqlServerCompiler(), table);
+        public static InsertBuilder Insert(this IDbConnection connection, string table)
+            => new InsertBuilder(connection, new SqlServerCompiler(), table);
+
+        public static UpdateBuilder Update(this IDbConnection connection)
+           => new UpdateBuilder(connection, new SqlServerCompiler());
+
+        public static UpdateBuilder Update(this IDbConnection connection, string table)
+            => new UpdateBuilder(connection, new SqlServerCompiler(), table);
+
+        public static DeleteBuilder Delete(this IDbConnection connection)
+           => new DeleteBuilder(connection, new SqlServerCompiler());
+
+        public static DeleteBuilder Delete(this IDbConnection connection, string table)
+            => new DeleteBuilder(connection, new SqlServerCompiler(), table);
+
+        public static T Insert<T>(this IDbConnection connection, T model)
+        {
+            InsertObject<T> insert = new InsertObject<T>(connection, new SqlServerCompiler(), model);
+            return insert.Save();
+        }
     }
 }

@@ -19,17 +19,44 @@ namespace ConsoleAppTest
             string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";            
 
             using (IDbConnection connection = new MySqlConnection(strConnection))
-            {                
-                People p0 = connection
-                    .Query()
-                    .From("people")
-                    .Where("id", 1)
-                    .First<People>();
+            {
+                //connection.Update("car")
+                //    .Set("description", "Escorte")
+                //    .Where("id", 5)
+                //    .Save();
 
-                var listPeople = connection
-                    .Query("people")
-                    .OrderBy("name")
-                    .List<People>();
+                //connection.Update("car")
+                //    .Set("description", "Parati")
+                //    .Where("id", 2)
+                //    .Save();
+
+
+                //connection.Update("car")
+                //    .Set("description", "Parati Super")                                        
+                //    .Where(x => x.Where("id", 2))
+                //    .Save();
+
+
+                connection.Delete("car")
+                    .Where("id", 1)
+                    .Save();
+
+                var cars = connection.Query("car").List<Car>();
+
+                //var credits = connection.Query("credit")
+                //        .List<Credit>();
+                var ab = 10;
+
+                //People p0 = connection
+                //    .Query()
+                //    .From("people")
+                //    .Where("id", 1)
+                //    .First<People>();
+
+                //var listPeople = connection
+                //    .Query("people")
+                //    .OrderBy("name")
+                //    .List<People>();
 
                 //var result0 = connection
                 //        .Insert("people")
@@ -43,12 +70,37 @@ namespace ConsoleAppTest
                 //    .Set(new { name = "Salomão", created = default(DateTime?), active = true })
                 //    .Save();
 
-                People p = new People();
-                p.Active = true;
-                p.Created = DateTime.Now.AddDays(-200);
-                p.Name = "Milena Fouston Rodrigues";
+                //People p = new People
+                //{
+                //    Active = true,
+                //    Created = DateTime.Parse("02/01/1990"),
+                //    Name = "Sr. Riston Rockets"
+                //};
 
-                var result2 = connection.Insert(p);             
+                //Credit cr = new Credit
+                //{
+                //    Created = null,
+                //    Description = "Datena Novo Programa null Created"
+                //};
+
+                //Notice nt = new Notice
+                //{
+                //    Id = Guid.NewGuid().ToString(),
+                //    Text = "Text 10",
+                //    Title = "Title 10"
+                //};
+
+                //nt = connection.Insert(nt);
+                //cr = connection.Insert(cr);
+
+                //Car c = new Car
+                //{
+                //    Description = "Busão"
+                //};
+
+                //connection.Insert(c);
+
+
             }
 
             Console.WriteLine("");
