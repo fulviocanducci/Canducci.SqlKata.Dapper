@@ -6,6 +6,13 @@ namespace Canducci.SqlKata.Dapper.Internals
     internal class DescribeObject<T> : IDisposable
     {
         public T Model { get; }
+        public bool IsHavePrimaryKey
+        {
+            get
+            {
+                return (PrimaryKey != null);                   
+            }
+        }
         public bool IsAutoIncrement
         {
             get

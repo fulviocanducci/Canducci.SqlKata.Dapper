@@ -46,8 +46,9 @@ namespace Canducci.SqlKata.Dapper
         #region save
         public T Save()
         {
-            DescribeObject<T> describe = DescribeObject<T>.Create(Model);            
-            SqlResult compiler = Compile(Query.From(describe.TableFrom.Name).AsInsert(describe.Items));
+            DescribeObject<T> describe = DescribeObject<T>.Create(Model);
+            Query.From(describe.TableFrom.Name).AsInsert(describe.Items);
+            SqlResult compiler = Compile(Query);
             string Sql = compiler.Sql + ((describe.IsAutoIncrement) ? GetCommandSqlGeneratedId(describe.IdName) : "");
             if (describe.IsAutoIncrement)
             {

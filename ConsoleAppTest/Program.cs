@@ -37,15 +37,15 @@ namespace ConsoleAppTest
                 //    .Save();
 
 
-                connection.Delete("car")
-                    .Where("id", 1)
-                    .Save();
+                //connection.Delete("car")
+                //    .Where("id", 1)
+                //    .Save();
 
-                var cars = connection.Query("car").List<Car>();
+                //var cars = connection.Query("car").List<Car>();
 
                 //var credits = connection.Query("credit")
                 //        .List<Credit>();
-                var ab = 10;
+                //var ab = 10;
 
                 //People p0 = connection
                 //    .Query()
@@ -77,21 +77,21 @@ namespace ConsoleAppTest
                 //    Name = "Sr. Riston Rockets"
                 //};
 
-                Credit cr = new Credit
-                {
-                    Created = null,
-                    Description = "Datena Novo Programa null Created 123"
-                };
+                //Credit cr = new Credit
+                //{
+                //    Created = null,
+                //    Description = "Datena Novo Programa null Created 123"
+                //};
 
-                Notice nt = new Notice
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Text = "Text 101",
-                    Title = "Title 101"
-                };
+                //Notice nt = new Notice
+                //{
+                //    Id = Guid.NewGuid().ToString(),
+                //    Text = "Text 101",
+                //    Title = "Title 101"
+                //};
 
-                nt = connection.Insert(nt);
-                cr = connection.Insert(cr);
+                //nt = connection.Insert(nt);
+                //cr = connection.Insert(cr);
 
                 //Car c = new Car
                 //{
@@ -99,6 +99,30 @@ namespace ConsoleAppTest
                 //};
 
                 //connection.Insert(c);
+
+
+                var cr = connection.Query()
+                    .From("car")
+                    .Where("id", 2)
+                    .First<Car>();
+
+                if (cr != null)
+                {
+                    cr.Description = "Busão Muito Louco 2";
+                    var result = connection.Update(cr);
+                }
+
+                var nt = connection.Query()
+                    .From("notice")
+                    .Where("id", "247fd9fa-69c2-4497-a65f-244d11d42944")
+                    .First<Notice>();
+
+                if (nt != null)
+                {
+                    nt.Title = "Title Update 101 ++++";
+                    nt.Text = "Text Update 101 +++";
+                    var result = connection.Update(nt);
+                }
 
 
             }

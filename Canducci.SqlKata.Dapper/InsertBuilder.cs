@@ -56,7 +56,6 @@ namespace Canducci.SqlKata.Dapper
         #endregion
 
         #region set
-
         public InsertBuilder Set<T>(string name, T value)
         {
             Items.Add(name, value);
@@ -102,7 +101,6 @@ namespace Canducci.SqlKata.Dapper
             }
             return this;
         }
-
         #endregion
 
         #region save

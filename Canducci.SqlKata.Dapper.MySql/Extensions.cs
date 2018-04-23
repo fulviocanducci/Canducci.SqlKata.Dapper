@@ -33,5 +33,11 @@ namespace Canducci.SqlKata.Dapper.MySql
             InsertObject<T> insert = new InsertObject<T>(connection, new MySqlCompiler(), model);
             return insert.Save();            
         }
+
+        public static bool Update<T>(this IDbConnection connection, T model)
+        {
+            UpdateObject<T> update = new UpdateObject<T>(connection, new MySqlCompiler(), model);
+            return update.Save();
+        }
     }
 }
