@@ -82,6 +82,7 @@
     <Compile Include="UnitTestMysql.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestPostgreSql.cs" />
+    <Compile Include="UnitTestSqlServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

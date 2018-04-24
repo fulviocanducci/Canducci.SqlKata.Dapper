@@ -37,7 +37,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestMethod1InsertBuilder()
+        public void TestMethodPostgreSql1InsertBuilder()
         {
             Database.Execute("TRUNCATE TABLE people RESTART IDENTITY;");            
             int ret1 = Database.Insert("people")
@@ -78,7 +78,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestMethod2QueryListOfPeople()
+        public void TestMethodPostgreSql2QueryListOfPeople()
         {
             var items = Database
                 .Query("people")
@@ -90,7 +90,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestMethod3UpdateBuilder()
+        public void TestMethodPostgreSql3UpdateBuilder()
         {
             int ret1 = Database.Update("people")
                 .Set(new
@@ -134,7 +134,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestMethod4QueryListOfPeople()
+        public void TestMethodPostgreSql4QueryListOfPeople()
         {
             var item = Database
                 .Query("people")
@@ -146,7 +146,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestMethod5DeleteBuilder()
+        public void TestMethodPostgreSql5DeleteBuilder()
         {
             int ret1 = Database.Delete("people")
                .Where("id", 1)

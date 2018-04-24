@@ -1,46 +1,47 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Canducci.SqlKata.Dapper;
-using Canducci.SqlKata.Dapper.MySql;
-using MySql.Data.MySqlClient;
-using Models;
-using System.Collections.Generic;
-using System;
+﻿using Canducci.SqlKata.Dapper;
+using Canducci.SqlKata.Dapper.SqlServer;
 using Dapper;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Models;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace UnitTestProject
 {
-    [TestClass]    
-    public class UnitTestMysql
+    [TestClass]
+    public class UnitTestSqlServer
     {
-        public MySqlConnection Database { get; set; }
+        public SqlConnection Database { get; set; }
         public string StrConnection
         {
             get
             {
-                return "Server=localhost;Database=testunit;Uid=root;Pwd=senha;SslMode=none";
+                return "Server=.\\SqlExpress;Database=TestUnit;User Id=sa;Password=senha;MultipleActiveResultSets=true;";
             }
         }
 
-        [TestInitialize]        
-        public void UnitTestMysqlInitialize()
+        [TestInitialize]
+        public void UnitTestSqlServerInitialize()
         {
             if (Database == null)
             {
-                Database = new MySqlConnection(StrConnection);                
+                Database = new SqlConnection(StrConnection);
             }
         }
 
-        ~UnitTestMysql()
+        ~UnitTestSqlServer()
         {
             Database?.Dispose();
         }
 
         [TestMethod]
-        public void TestMethodMysql1InsertBuilder()
+        public void TestMethodSqlServer1InsertBuilder()
         {
-            Database.Execute("TRUNCATE TABLE people");
+            Database.Execute("TRUNCATE TABLE People");
 
-            int ret1 = Database.Insert("people")
+            int ret1 = Database.Insert("People")
                 .Set(new
                 {
                     name = "name 1",
@@ -49,7 +50,7 @@ namespace UnitTestProject
                 })
                 .Save();
 
-            int ret2 = Database.Insert("people")
+            int ret2 = Database.Insert("People")
                 .Set(new Dictionary<string, object>
                 {
                     ["name"] = "name 2",
@@ -58,14 +59,14 @@ namespace UnitTestProject
                 })
                 .Save();
 
-            int ret3 = Database.Insert("people")
+            int ret3 = Database.Insert("People")
                 .Set(
                         new string[] { "name", "createdat", "active" },
                         new object[] { "name 3", DateTime.Now.AddDays(-100), true }
                     )
                 .Save();
 
-            int ret4 = Database.Insert("people")
+            int ret4 = Database.Insert("People")
                 .Set("name", "name 4")
                 .Set("createdat", DateTime.Now.AddDays(-100))
                 .Set("active", true)
@@ -78,53 +79,53 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestMethodMysql2QueryListOfPeople()
+        public void TestMethodSqlServer2QueryListOfPeople()
         {
             var items = Database
-                .Query("people")
-                .OrderBy("id")
+                .Query("People")
+                .OrderBy("Id")
                 .List<People>();
 
             Assert.IsInstanceOfType(items, typeof(IEnumerable<People>));
-            Assert.IsNotNull(items);            
+            Assert.IsNotNull(items);
         }
 
         [TestMethod]
-        public void TestMethodMysql3UpdateBuilder()
+        public void TestMethodSqlServer3UpdateBuilder()
         {
-            int ret1 = Database.Update("people")
+            int ret1 = Database.Update("People")
                 .Set(new
                 {
                     name = "name 1",
                     createdat = DateTime.Now.AddDays(-100),
                     active = false
                 })
-                .Where("id", 1)
+                .Where("Id", 1)
                 .Save();
 
-            int ret2 = Database.Update("people")
+            int ret2 = Database.Update("People")
                 .Set(new Dictionary<string, object>
                 {
                     ["name"] = "name 2",
                     ["createdat"] = DateTime.Now.AddDays(-100),
                     ["active"] = false,
                 })
-                .Where("id", 2)
+                .Where("Id", 2)
                 .Save();
 
-            int ret3 = Database.Update("people")
+            int ret3 = Database.Update("People")
                 .Set(
                         new string[] { "name", "createdat", "active" },
                         new object[] { "name 3", DateTime.Now.AddDays(-100), false }
                     )
-                    .Where("id", 3)
+                    .Where("Id", 3)
                 .Save();
 
-            int ret4 = Database.Update("people")
+            int ret4 = Database.Update("People")
                 .Set("name", "name 4")
                 .Set("createdat", DateTime.Now.AddDays(-100))
                 .Set("active", false)
-                .Where("id", 4)
+                .Where("Id", 4)
                 .Save();
 
             Assert.IsTrue(ret1 == 1);
@@ -134,34 +135,34 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestMethodMysql4QueryListOfPeople()
+        public void TestMethodSqlServer4QueryListOfPeople()
         {
             var item = Database
-                .Query("people")
-                .Where("id", 1)
+                .Query("People")
+                .Where("Id", 1)
                 .First<People>();
 
             Assert.IsNotNull(item);
-            Assert.IsInstanceOfType(item, typeof(People));            
+            Assert.IsInstanceOfType(item, typeof(People));
         }
-        
+
         [TestMethod]
-        public void TestMethodMysql5DeleteBuilder()
+        public void TestMethodSqlServer5DeleteBuilder()
         {
-            int ret1 = Database.Delete("people")               
-               .Where("id", 1)               
+            int ret1 = Database.Delete("People")
+               .Where("Id", 1)
                .Save();
 
-            int ret2 = Database.Delete("people")                
-                .Where("id", 2)
+            int ret2 = Database.Delete("People")
+                .Where("Id", 2)
                 .Save();
 
-            int ret3 = Database.Delete("people")
-                .Where("id", 3)
+            int ret3 = Database.Delete("People")
+                .Where("Id", 3)
                 .Save();
 
-            int ret4 = Database.Delete("people")                
-                .Where("id", 4)
+            int ret4 = Database.Delete("People")
+                .Where("Id", 4)
                 .Save();
 
             Assert.IsTrue(ret1 == 1);
