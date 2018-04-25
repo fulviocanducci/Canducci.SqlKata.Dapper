@@ -6,6 +6,7 @@ namespace Models
     public class People
     {
         [PrimaryKey()]
+        [ColumnName("id")]
         public int Id { get; set; }
 
         [ColumnName("name")]

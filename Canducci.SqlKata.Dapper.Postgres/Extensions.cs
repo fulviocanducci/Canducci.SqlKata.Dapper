@@ -1,9 +1,13 @@
 ﻿using SqlKata.Compilers;
+using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
+
 namespace Canducci.SqlKata.Dapper.Postgres
 {
     public static class Extensions
     {
+        #region builder
         public static QueryBuilder Query(this IDbConnection connection)
             => new QueryBuilder(connection, new PostgresCompiler());
 
@@ -27,11 +31,18 @@ namespace Canducci.SqlKata.Dapper.Postgres
 
         public static DeleteBuilder Delete(this IDbConnection connection, string table)
             => new DeleteBuilder(connection, new PostgresCompiler(), table);
+        #endregion
 
         public static T Insert<T>(this IDbConnection connection, T model)
         {
             InsertObject<T> insert = new InsertObject<T>(connection, new PostgresCompiler(), model);
             return insert.Save();
+        }
+
+        public static async Task<T> InsertAsync<T>(this IDbConnection connection, T model)
+        {
+            InsertObject<T> insert = new InsertObject<T>(connection, new PostgresCompiler(), model);
+            return await insert.SaveAsync();
         }
 
         public static bool Update<T>(this IDbConnection connection, T model)
@@ -40,16 +51,46 @@ namespace Canducci.SqlKata.Dapper.Postgres
             return update.Save();
         }
 
+        public static async Task<bool> UpdateAsync<T>(this IDbConnection connection, T model)
+        {
+            UpdateObject<T> update = new UpdateObject<T>(connection, new PostgresCompiler(), model);
+            return await update.SaveAsync();
+        }
+
         public static bool Delete<T>(this IDbConnection connection, T model)
         {
             DeleteObject<T> delete = new DeleteObject<T>(connection, new PostgresCompiler(), model);
             return delete.Save();
         }
 
+        public static async Task<bool> DeleteAsync<T>(this IDbConnection connection, T model)
+        {
+            DeleteObject<T> delete = new DeleteObject<T>(connection, new PostgresCompiler(), model);
+            return await delete.SaveAsync();
+        }
+
         public static T Find<T>(this IDbConnection connection, object id)
         {
             FindObject<T> find = new FindObject<T>(connection, new PostgresCompiler(), id);
             return find.Get();
+        }
+
+        public static async Task<T> FindAsync<T>(this IDbConnection connection, object id)
+        {
+            FindObject<T> find = new FindObject<T>(connection, new PostgresCompiler(), id);
+            return await find.GetAsync();
+        }
+
+        public static IEnumerable<T> List<T>(this IDbConnection connection)
+        {
+            ListObject<T> list = new ListObject<T>(connection, new PostgresCompiler());
+            return list.List();
+        }
+
+        public static async Task<IEnumerable<T>> ListAsync<T>(this IDbConnection connection)
+        {
+            ListObject<T> list = new ListObject<T>(connection, new PostgresCompiler());
+            return await list.ListAsync();
         }
     }
 }

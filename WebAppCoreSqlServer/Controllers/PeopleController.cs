@@ -2,6 +2,8 @@
 using Canducci.SqlKata.Dapper.SqlServer;
 using Models;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
+
 namespace WebAppCoreSqlServer.Controllers
 {
     public class PeopleController : Controller
@@ -13,9 +15,9 @@ namespace WebAppCoreSqlServer.Controllers
             Database = database;
         }
         
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(Database.Query("peoples").List<People>());
+            return View(await Database.ListAsync<People>());
         }
                 
         public ActionResult Details(int id)

@@ -6,6 +6,8 @@ using Canducci.SqlKata.Dapper.MySql;
 using MySql.Data.MySqlClient;
 using Canducci.SqlKata.Dapper;
 using Models;
+using ConsoleAppTest.Models;
+using SqlKata;
 
 namespace ConsoleAppTest
 {
@@ -14,120 +16,125 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
 
+            Query q = new Query();
+            
 
+            TestExpressions te = new TestExpressions();
+            var obj = te.GetName<People>(x => x.Id);
+            
             //MYSQLSERVER TEST
-            string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";            
+            string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";
+            #region _001
+            //using (IDbConnection connection = new MySqlConnection(strConnection))
+            //{
+            //    var r = connection.Update("car")
+            //        .Set("description", "Maverick")
+            //        .Where("id", 2)
+            //        .Save();
 
-            using (IDbConnection connection = new MySqlConnection(strConnection))
-            {
-                var r = connection.Update("car")
-                    .Set("description", "Maverick")
-                    .Where("id", 2)
-                    .Save();
-
-                var a = 1;
-                //connection.Update("car")
-                //    .Set("description", "Parati")
-                //    .Where("id", 2)
-                //    .Save();
-
-
-                //connection.Update("car")
-                //    .Set("description", "Parati Super")                                        
-                //    .Where(x => x.Where("id", 2))
-                //    .Save();
+            //    var a = 1;
+            //    //connection.Update("car")
+            //    //    .Set("description", "Parati")
+            //    //    .Where("id", 2)
+            //    //    .Save();
 
 
-                //connection.Delete("car")
-                //    .Where("id", 1)
-                //    .Save();
-
-                //var cars = connection.Query("car").List<Car>();
-
-                //var credits = connection.Query("credit")
-                //        .List<Credit>();
-                //var ab = 10;
-
-                //People p0 = connection
-                //    .Query()
-                //    .From("people")
-                //    .Where("id", 1)
-                //    .First<People>();
-
-                //var listPeople = connection
-                //    .Query("people")
-                //    .OrderBy("name")
-                //    .List<People>();
-
-                //var result0 = connection
-                //        .Insert("people")
-                //        .Set("name", "Salvando de novo")
-                //        .SetNull("created")
-                //        .Set("active", true)
-                //        .Save();
-
-                //var result1 = connection
-                //    .Insert("people")
-                //    .Set(new { name = "Salomão", created = default(DateTime?), active = true })
-                //    .Save();
-
-                //People p = new People
-                //{
-                //    Active = true,
-                //    Created = DateTime.Parse("02/01/1990"),
-                //    Name = "Sr. Riston Rockets"
-                //};
-
-                //Credit cr = new Credit
-                //{
-                //    Created = null,
-                //    Description = "Datena Novo Programa null Created 123"
-                //};
-
-                //Notice nt = new Notice
-                //{
-                //    Id = Guid.NewGuid().ToString(),
-                //    Text = "Text 101",
-                //    Title = "Title 101"
-                //};
-
-                //nt = connection.Insert(nt);
-                //cr = connection.Insert(cr);
-
-                //Car c = new Car
-                //{
-                //    Description = "Busão"
-                //};
-
-                //connection.Insert(c);
+            //    //connection.Update("car")
+            //    //    .Set("description", "Parati Super")                                        
+            //    //    .Where(x => x.Where("id", 2))
+            //    //    .Save();
 
 
-                var cr = connection.Query()
-                    .From("car")
-                    .Where("id", 2)
-                    .First<Car>();
+            //    //connection.Delete("car")
+            //    //    .Where("id", 1)
+            //    //    .Save();
 
-                if (cr != null)
-                {
-                    cr.Description = "Busão Muito Louco 2";
-                    var result = connection.Update(cr);
-                }
+            //    //var cars = connection.Query("car").List<Car>();
 
-                var nt = connection.Query()
-                    .From("notice")
-                    .Where("id", "247fd9fa-69c2-4497-a65f-244d11d42944")
-                    .First<Notice>();
+            //    //var credits = connection.Query("credit")
+            //    //        .List<Credit>();
+            //    //var ab = 10;
 
-                if (nt != null)
-                {
-                    nt.Title = "Title Update 101 ++++";
-                    nt.Text = "Text Update 101 +++";
-                    var result = connection.Update(nt);
-                }
+            //    //People p0 = connection
+            //    //    .Query()
+            //    //    .From("people")
+            //    //    .Where("id", 1)
+            //    //    .First<People>();
+
+            //    //var listPeople = connection
+            //    //    .Query("people")
+            //    //    .OrderBy("name")
+            //    //    .List<People>();
+
+            //    //var result0 = connection
+            //    //        .Insert("people")
+            //    //        .Set("name", "Salvando de novo")
+            //    //        .SetNull("created")
+            //    //        .Set("active", true)
+            //    //        .Save();
+
+            //    //var result1 = connection
+            //    //    .Insert("people")
+            //    //    .Set(new { name = "Salomão", created = default(DateTime?), active = true })
+            //    //    .Save();
+
+            //    //People p = new People
+            //    //{
+            //    //    Active = true,
+            //    //    Created = DateTime.Parse("02/01/1990"),
+            //    //    Name = "Sr. Riston Rockets"
+            //    //};
+
+            //    //Credit cr = new Credit
+            //    //{
+            //    //    Created = null,
+            //    //    Description = "Datena Novo Programa null Created 123"
+            //    //};
+
+            //    //Notice nt = new Notice
+            //    //{
+            //    //    Id = Guid.NewGuid().ToString(),
+            //    //    Text = "Text 101",
+            //    //    Title = "Title 101"
+            //    //};
+
+            //    //nt = connection.Insert(nt);
+            //    //cr = connection.Insert(cr);
+
+            //    //Car c = new Car
+            //    //{
+            //    //    Description = "Busão"
+            //    //};
+
+            //    //connection.Insert(c);
 
 
-            }
+            //    var cr = connection.Query()
+            //        .From("car")
+            //        .Where("id", 2)
+            //        .First<Car>();
 
+            //    if (cr != null)
+            //    {
+            //        cr.Description = "Busão Muito Louco 2";
+            //        var result = connection.Update(cr);
+            //    }
+
+            //    var nt = connection.Query()
+            //        .From("notice")
+            //        .Where("id", "247fd9fa-69c2-4497-a65f-244d11d42944")
+            //        .First<Notice>();
+
+            //    if (nt != null)
+            //    {
+            //        nt.Title = "Title Update 101 ++++";
+            //        nt.Text = "Text Update 101 +++";
+            //        var result = connection.Update(nt);
+            //    }
+
+
+            //}
+            #endregion
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("Execução finalizada com sucesso !!!");
@@ -153,7 +160,7 @@ namespace ConsoleAppTest
             using (IDbConnection connection = new SqlConnection(strConnection))
             //using (NpgsqlConnection connection = new NpgsqlConnection(strConnection))
             {
-
+                
                 //var db = new QueryBuilderDapper(connection, compiler, "People");
                 /*
                 var result0 = db.Select("*")
