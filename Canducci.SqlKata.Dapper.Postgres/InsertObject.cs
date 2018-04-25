@@ -12,7 +12,7 @@ namespace Canducci.SqlKata.Dapper.Postgres
         protected override string GetCommandSqlGeneratedId(params object[] values)
         {            
             object id = values.Length > 0 ? values[0] : "id";
-            return @";RETURNING {id};";
+            return $" RETURNING {id}";
         }
     }
 }

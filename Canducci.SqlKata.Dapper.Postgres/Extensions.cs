@@ -42,9 +42,14 @@ namespace Canducci.SqlKata.Dapper.Postgres
 
         public static bool Delete<T>(this IDbConnection connection, T model)
         {
-            DeleteObject<T> update = new DeleteObject<T>(connection, new PostgresCompiler(), model);
-            return update.Save();
+            DeleteObject<T> delete = new DeleteObject<T>(connection, new PostgresCompiler(), model);
+            return delete.Save();
         }
 
+        public static T Find<T>(this IDbConnection connection, object id)
+        {
+            FindObject<T> find = new FindObject<T>(connection, new PostgresCompiler(), id);
+            return find.Get();
+        }
     }
 }

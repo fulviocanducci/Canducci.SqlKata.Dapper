@@ -36,10 +36,15 @@ namespace UnitTestProject
             Database?.Dispose();
         }
 
+        private void InitTable()
+        {
+            Database.Execute("TRUNCATE TABLE people RESTART IDENTITY;");
+        }
+
         [TestMethod]
         public void TestMethodPostgreSql1InsertBuilder()
         {
-            Database.Execute("TRUNCATE TABLE people RESTART IDENTITY;");            
+            InitTable();
             int ret1 = Database.Insert("people")
                 .Set(new
                 {
@@ -168,6 +173,51 @@ namespace UnitTestProject
             Assert.IsTrue(ret2 == 1);
             Assert.IsTrue(ret3 == 1);
             Assert.IsTrue(ret4 == 1);
+        }
+
+        [TestMethod]
+        public void TestMethodPostgreSql6InsertObject()
+        {
+            InitTable();
+
+            People p = new People
+            {
+                Active = true,
+                CreatedAt = DateTime.Now.AddDays(-5),
+                Name = "Insert 1"
+            };
+
+            var p0 = Database.Insert(p);
+            Assert.AreEqual(p0, p);
+            Assert.IsTrue(p.Id > 0);
+            Assert.IsTrue(p0.Id > 0);
+            Assert.IsTrue(p0.Id == 1);
+            Assert.AreEqual(p0.Id, p.Id);
+            Assert.IsInstanceOfType(p, typeof(People));
+            Assert.IsInstanceOfType(p0, typeof(People));
+            Assert.IsNotNull(p);
+            Assert.IsNotNull(p0);
+        }
+
+        [TestMethod]
+        public void TestMethodPostgreSql7UpdateObject()
+        {
+            People p = Database.Find<People>(1);
+            p.Name = "Insert 2";
+            var ret1 = Database.Update(p);
+
+            Assert.IsTrue(ret1);
+            Assert.IsTrue(p.Id == 1);
+            Assert.IsInstanceOfType(p, typeof(People));
+            Assert.IsNotNull(p);
+        }
+
+        [TestMethod]
+        public void TestMethodPostgreSql8DeleteObject()
+        {
+            People p = Database.Find<People>(1);
+            var ret1 = Database.Delete(p);
+            Assert.IsTrue(ret1);
         }
     }
 }

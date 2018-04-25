@@ -1,0 +1,68 @@
+﻿@model Models.People
+@{
+    ViewData["Title"] = "Gravar";
+}
+<h3>Novo registro!</h3>
+<hr />
+<h4>Pessoa</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" name="form1" id="form1">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Nome:</label>
+                <input asp-for="Name" class="form-control" autofocus/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedAt" class="control-label">Criado em:</label>
+                <input asp-for="CreatedAt" type="text" class="form-control" maxlength="10" />
+                <span asp-validation-for="CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input asp-for="Active" /> @Html.Raw("Status:")
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Gravar" class="btn btn-success" /> |
+                <a asp-action="Index" class="btn btn-default">« Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+<script src="~/lib/momentjs/moment-with-locales.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script>
+        moment.locale('pt-BR');    
+        $(function () {
+            $("#form1").validate({
+                rules: {
+                    Name: {
+                        required: true
+                    },
+                    CreatedAt: {
+                        required: true,
+                        date: true
+                    }
+                },
+                messages: {
+                    Name: {
+                        required: "Digite o nome"
+                    },
+                    CreatedAt: {
+                        required: "Digite a data",
+                        date: "Data inválida"
+                    }
+                }
+            });
+        });
+</script>
+}

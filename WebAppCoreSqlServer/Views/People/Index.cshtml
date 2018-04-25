@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Models.People>
+@{
+    ViewData["Title"] = "Lista de Pessoas";
+}
+<h3>Listas de Pessoas</h3>
+<hr />
+<p class="text-center">
+    <a asp-action="Create" class="btn btn-default">Novo registro</a>
+</p>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+                <th style="width:10%; text-align:center">
+                    @Html.Raw("Código:")
+                </th>
+                <th style="width:40%; text-align:center">
+                    @Html.Raw("Nome:")
+                </th>
+                <th style="width:15%; text-align:center">
+                    @Html.Raw("Criado em:")
+                </th>
+                <th style="width:10%; text-align:center">
+                    @Html.Raw("Status:")
+                </th>
+            <th style="width:25%; text-align:center">...</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td style="text-align:left">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td style="text-align:center">
+                @Html.ActionLink("Alterar", "Edit", new { id = item.Id }, new  { @class= "btn btn-warning" }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

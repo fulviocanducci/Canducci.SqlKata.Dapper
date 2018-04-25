@@ -50,8 +50,8 @@ namespace Canducci.SqlKata.Dapper.Base
             return null;
         }
         public bool Save()
-        {            
-            SqlResult compiler = Compile(Query);
+        {
+            SqlResult compiler = GetSqlResultFromQuery();
             if (compiler != null)
             {
                 return (Connection.Execute(compiler.Sql, compiler.Bindings) > 0);
@@ -61,7 +61,7 @@ namespace Canducci.SqlKata.Dapper.Base
 
         public async Task<bool> SaveAsync()
         {
-            SqlResult compiler = Compile(Query);
+            SqlResult compiler = GetSqlResultFromQuery();
             if (compiler != null)
             {
                 return (await Connection.ExecuteAsync(compiler.Sql, compiler.Bindings) > 0);

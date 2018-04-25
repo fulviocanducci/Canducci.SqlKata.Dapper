@@ -47,11 +47,10 @@ namespace Canducci.SqlKata.Dapper.Base
                 if (describe.Items.ContainsKey(describe.IdName))
                 {
                     describe.Items.Remove(describe.IdName);
-                }
-                Query.From(describe.TableFrom.Name).AsUpdate(describe.Items).Where(describe.IdName, describe.Id.GetValue(Model));
-                return Compile(Query);
+                }                
             }
-            return null;
+            Query.From(describe.TableFrom.Name).AsUpdate(describe.Items).Where(describe.IdName, describe.Id.GetValue(Model));
+            return Compile(Query);            
         }
         public bool Save()
         {

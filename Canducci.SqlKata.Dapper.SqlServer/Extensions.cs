@@ -45,5 +45,11 @@ namespace Canducci.SqlKata.Dapper.SqlServer
             DeleteObject<T> update = new DeleteObject<T>(connection, new SqlServerCompiler(), model);
             return update.Save();
         }
+
+        public static T Find<T>(this IDbConnection connection, object id)
+        {
+            FindObject<T> find = new FindObject<T>(connection, new SqlServerCompiler(), id);
+            return find.Get();
+        }
     }
 }
