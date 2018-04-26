@@ -1,27 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>    
-    <Version>1.0.4</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  <PropertyGroup>
     <PackageProjectUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</PackageProjectUrl>
-    <PackageIconUrl>http://i1194.photobucket.com/albums/aa377/netdragoon1/abcdef_zpsh8xp8c88.png</PackageIconUrl>
+    <PackageIconUrl>http://www.oracle.com/technetwork/developer-tools/sql-developer/sqldev-64-2015-2530893.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.4</Version>
+    <Product>Canducci SqlKata Dapper SQLite</Product>
+    <Company>Canducci</Company>
+    <Authors>Canducci</Authors>
     <AssemblyVersion>1.0.4.0</AssemblyVersion>
     <FileVersion>1.0.4.0</FileVersion>
-    <Authors>Canducci</Authors>
-    <Company>Canducci</Company>
-    <Product>Canducci SqlKata Dapper Postgres</Product>
     <TargetFrameworks>net451;net46;net47;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
-    <PackageTags>SqlKata Dapper SQL PostGres</PackageTags>
+    <PackageTags>SqlKata Dapper SQL PostGres MySql SqlServer</PackageTags>
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
+    <PackageReleaseNotes>
+      https://github.com/fulviocanducci/Canducci.SqlKata.Dapper
+      https://sqlkata.com/docs
+    </PackageReleaseNotes>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
-    <PackageReleaseNotes>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper
-https://sqlkata.com/docs</PackageReleaseNotes>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.3.2" />
   </ItemGroup>
-
+  
 </Project>

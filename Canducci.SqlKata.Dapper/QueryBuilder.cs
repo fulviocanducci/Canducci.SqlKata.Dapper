@@ -22,7 +22,7 @@ namespace Canducci.SqlKata.Dapper
 
         #region Compiler
         protected SqlResult Compiler()
-        {
+        {            
             return compiler.Compile(this);
         }        
         #endregion
