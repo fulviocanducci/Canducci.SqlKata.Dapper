@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Data.SqlClient;
 using Canducci.SqlKata.Dapper;
-using Canducci.SqlKata.Dapper.Extensions;
-//using Canducci.SqlKata.Dapper.Extensions.Builder;
-//using Canducci.SqlKata.Dapper.Extensions.SoftBuilder;
-using Canducci.SqlKata.Dapper.Extensions.MultipleBuilder;
 using System.Data;
-using SqlKata.Compilers;
-using SqlKata;
 using Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
-using static Dapper.SqlMapper;
+using SqlKata.QueryBuilder.Compilers;
 
 namespace ConsoleAppTest
 {
@@ -30,7 +23,7 @@ namespace ConsoleAppTest
             {
                 var c = new QueryBuilderSoftDapper(connection, compiler);
 
-                var reader = c.QueryBuilderMultipleCollection();
+                var reader = c.QueryBuilderMultipleCollection()
                     .AddQuery(x => x.From("People").OrderBy("Id"))
                     .AddQuery(x => x.From("Credit").OrderBy("Id"))
                     .AddQuery(x => x.From("People").Where("Id", 1))

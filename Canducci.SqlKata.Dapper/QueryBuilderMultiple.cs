@@ -1,13 +1,12 @@
-﻿using SqlKata;
-using SqlKata.Compilers;
+﻿using Dapper;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using Dapper;
-using static Dapper.SqlMapper;
-using System.Threading.Tasks;
 using System.Text;
-
+using SqlKata.QueryBuilder;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using SqlKata.QueryBuilder.Compilers;
+using static Dapper.SqlMapper;
 namespace Canducci.SqlKata.Dapper
 {
     public class QueryBuilderMultiple: IDisposable

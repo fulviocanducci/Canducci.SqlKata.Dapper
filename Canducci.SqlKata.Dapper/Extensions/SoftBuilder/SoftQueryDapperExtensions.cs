@@ -1,9 +1,8 @@
-﻿using Canducci.SqlKata.Dapper.Extensions.Internals;
-using SqlKata;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
+using SqlKata.QueryBuilder;
 using System.Threading.Tasks;
-
+using System.Collections.Generic;
+using Canducci.SqlKata.Dapper.Extensions.Internals;
 namespace Canducci.SqlKata.Dapper.Extensions.SoftBuilder
 {
     public static class SoftQueryDapperExtensions

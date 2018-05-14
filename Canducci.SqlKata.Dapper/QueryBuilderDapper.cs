@@ -1,10 +1,10 @@
 ﻿using Dapper;
-using SqlKata;
-using SqlKata.Compilers;
 using System;
-using System.Collections.Generic;
 using System.Data;
+using SqlKata.QueryBuilder;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using SqlKata.QueryBuilder.Compilers;
 using static Dapper.SqlMapper;
 namespace Canducci.SqlKata.Dapper
 {

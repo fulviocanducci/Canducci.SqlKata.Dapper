@@ -1,16 +1,15 @@
-﻿using Canducci.SqlKata.Dapper.Extensions.Internals;
-using SqlKata;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
+using SqlKata.QueryBuilder;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Canducci.SqlKata.Dapper.Extensions.Internals;
 using static Dapper.SqlMapper;
 
 namespace Canducci.SqlKata.Dapper.Extensions.Builder
 {
     public static class QueryDapperExtensions
     {       
-
         public static int Execute(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             return query.AsQueryBuilderDapper().Execute(transaction, commandTimeout, commandType);            

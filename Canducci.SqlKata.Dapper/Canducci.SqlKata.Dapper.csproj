@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>    	
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.4</Version>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
-    <FileVersion>1.0.4.0</FileVersion>
+    <Version>1.0.5</Version>
+    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <FileVersion>1.0.5.0</FileVersion>
     <PackageLicenseUrl></PackageLicenseUrl>
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>    
@@ -14,17 +14,15 @@
 	  <TargetFrameworks>net451;net46;net47;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
-    <PackageTags>SqlKata Dapper SQL PostGres MySql SqlServer</PackageTags>
-    <PackageReleaseNotes>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper
-https://sqlkata.com/docs
-AddCollectionQuery Many Results</PackageReleaseNotes>
+    <PackageTags>SqlKata Dapper SQL Postgres MySql SqlServer</PackageTags>
+    <PackageReleaseNotes>SqlKata v484</PackageReleaseNotes>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
   </PropertyGroup>
 
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.4" />
-    <PackageReference Include="SqlKata" Version="1.0.0-beta-458" />
+    <PackageReference Include="SqlKata" Version="1.0.0-beta-484" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup> 
   

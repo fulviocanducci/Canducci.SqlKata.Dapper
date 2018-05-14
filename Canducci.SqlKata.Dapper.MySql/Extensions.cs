@@ -1,4 +1,4 @@
-﻿using SqlKata.Compilers;
+﻿using SqlKata.QueryBuilder.Compilers;
 using System.Data;
 namespace Canducci.SqlKata.Dapper.MySql
 {
