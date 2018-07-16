@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Canducci.SqlKata.Dapper.Extensions.Internals;
 using System.Threading.Tasks;
-using SqlKata.QueryBuilder;
+using SqlKata;
 
 namespace Canducci.SqlKata.Dapper.Extensions.SoftBuilder
 {

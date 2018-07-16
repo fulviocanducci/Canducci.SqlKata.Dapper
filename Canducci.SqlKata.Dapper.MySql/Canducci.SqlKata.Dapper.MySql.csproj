@@ -2,9 +2,9 @@
 
   <PropertyGroup>    
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.5.0</AssemblyVersion>
-    <FileVersion>1.0.5.0</FileVersion>
-    <Version>1.0.5</Version>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
+    <FileVersion>1.0.6.0</FileVersion>
+    <Version>1.0.6</Version>
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>
     <PackageLicenseUrl></PackageLicenseUrl>
@@ -23,7 +23,7 @@ SqlKata v484</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.5" />
+    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.6" />
   </ItemGroup>
 
 </Project>

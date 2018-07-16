@@ -5,7 +5,7 @@ using System.Data;
 using Models;
 using System.Collections.Generic;
 using System.Linq;
-using SqlKata.QueryBuilder.Compilers;
+using SqlKata.Compilers;
 
 namespace ConsoleAppTest
 {

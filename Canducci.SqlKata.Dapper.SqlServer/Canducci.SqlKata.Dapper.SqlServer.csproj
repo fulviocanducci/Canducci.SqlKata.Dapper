@@ -5,12 +5,12 @@
     <PackageIconUrl>http://www.oracle.com/technetwork/developer-tools/sql-developer/sqldev-64-2015-2530893.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <Product>Canducci SqlKata Dapper SqlServer</Product>
     <Company>Canducci</Company>
     <Authors>Canducci</Authors>
-    <AssemblyVersion>1.0.5.0</AssemblyVersion>
-    <FileVersion>1.0.5.0</FileVersion>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
+    <FileVersion>1.0.6.0</FileVersion>
     <TargetFrameworks>net451;net46;net47;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
     <PackageTags>SqlKata Dapper SQL PostGres MySql SqlServer</PackageTags>
@@ -22,7 +22,7 @@ SqlKata v484</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.5" />
+    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.0.6" />
   </ItemGroup>
 
 </Project>
