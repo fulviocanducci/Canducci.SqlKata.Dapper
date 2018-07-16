@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using SqlKata.QueryBuilder;
+using SqlKata;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Canducci.SqlKata.Dapper.Extensions.Internals;

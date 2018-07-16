@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
-using SqlKata.QueryBuilder;
-using SqlKata.QueryBuilder.Compilers;
+using SqlKata;
+using SqlKata.Compilers;
 namespace Canducci.SqlKata.Dapper
 {
     public abstract class QueryBuilder: Query

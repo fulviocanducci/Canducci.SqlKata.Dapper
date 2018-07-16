@@ -1,5 +1,5 @@
-﻿using SqlKata.QueryBuilder;
-using SqlKata.QueryBuilder.Compilers;
+﻿using SqlKata;
+using SqlKata.Compilers;
 namespace Canducci.SqlKata.Dapper.Extensions.Internals
 {
     internal static class QueryBuilderCompilerInternals
@@ -10,21 +10,21 @@ namespace Canducci.SqlKata.Dapper.Extensions.Internals
             SqlResult result = compiler.Compile(query);
             string sqlComplement = result.Sql;
             sqlComplement = sqlComplement.Insert(result.Sql.IndexOf(" VALUE"), $" OUTPUT INSERTED.{primaryKeyName} ");
-            return new SqlResult(sqlComplement, result.RawBindings);
+            return new SqlResult() { RawSql = sqlComplement, Bindings = result.Bindings };
         }
 
         public static SqlResult CompileWithLastIdToInt(this SqlServerCompiler compiler, Query query)
         {
             SqlResult result = compiler.Compile(query);
             string sqlComplement = result.Sql + ";SELECT CAST(SCOPE_IDENTITY() AS INT);";
-            return new SqlResult(sqlComplement, result.RawBindings);
+            return new SqlResult() { RawSql = sqlComplement, Bindings = result.Bindings };
         }
 
         public static SqlResult CompileWithLastIdToLong(this SqlServerCompiler compiler, Query query)
         {
             SqlResult result = compiler.Compile(query);
             string sqlComplement = result.Sql + ";SELECT CAST(SCOPE_IDENTITY() AS BIGINT);";
-            return new SqlResult(sqlComplement, result.RawBindings);
+            return new SqlResult() { RawSql = sqlComplement, Bindings = result.Bindings };
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace Canducci.SqlKata.Dapper.Extensions.Internals
         {
             SqlResult result = compiler.Compile(query);
             //return new SqlResult(result.Sql + ";SELECT lastval();", result.RawBindings);
-            return new SqlResult(result.Sql + $" RETURNING \"{primaryKeyName}\"", result.RawBindings);
+            return new SqlResult() { RawSql = (result.Sql + $" RETURNING \"{primaryKeyName}\""), Bindings = result.Bindings };
         }
         #endregion
 
@@ -41,7 +41,7 @@ namespace Canducci.SqlKata.Dapper.Extensions.Internals
         public static SqlResult CompileWithLastId(this MySqlCompiler compiler, Query query)
         {
             SqlResult result = compiler.Compile(query);
-            return new SqlResult(result.Sql + ";SELECT LAST_INSERT_ID();", result.RawBindings);
+            return new SqlResult() { RawSql = (result.Sql + ";SELECT LAST_INSERT_ID();"), Bindings = result.Bindings };
         }
         #endregion
     }

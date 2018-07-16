@@ -1,5 +1,5 @@
 ﻿using System;
-using SqlKata.QueryBuilder;
+using SqlKata;
 namespace Canducci.SqlKata.Dapper.Extensions.Internals
 {
     internal static class QueryBuilderInternals

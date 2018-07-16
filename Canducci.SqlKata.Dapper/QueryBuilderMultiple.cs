@@ -2,10 +2,10 @@
 using System;
 using System.Data;
 using System.Text;
-using SqlKata.QueryBuilder;
+using SqlKata;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using SqlKata.QueryBuilder.Compilers;
+using SqlKata.Compilers;
 using static Dapper.SqlMapper;
 namespace Canducci.SqlKata.Dapper
 {
@@ -61,10 +61,10 @@ namespace Canducci.SqlKata.Dapper
                     var result = Compiler.Compile(items[i]);
                     if (sqls.Length > 0) sqls.Append(";");
                     sqls.Append(result.RawSql);
-                    bindings.AddRange(result.RawBindings);
+                    bindings.AddRange(result.Bindings);
                 }
             }
-            return new SqlResult(sqls.ToString(), bindings);
+            return new SqlResult() { RawSql = sqls.ToString(), Bindings = bindings };
         }
 
         public void Dispose()
