@@ -32,14 +32,14 @@ namespace Canducci.SqlKata.Dapper
         {
             SqlResult result = CompilerListQueries(Queries);
             Clear();
-            return Connection.QueryMultiple(result.Sql, result.Bindings, transaction, commandTimeout, commandType);            
+            return Connection.QueryMultiple(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);            
         }
 
         public async Task<GridReader> ResultsAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             SqlResult result = CompilerListQueries(Queries);
             Clear();
-            return await Connection.QueryMultipleAsync(result.Sql, result.Bindings, transaction, commandTimeout, commandType);
+            return await Connection.QueryMultipleAsync(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
 
         public void Clear()

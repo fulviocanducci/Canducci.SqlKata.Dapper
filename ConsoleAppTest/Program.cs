@@ -6,6 +6,7 @@ using Models;
 using System.Collections.Generic;
 using System.Linq;
 using SqlKata.Compilers;
+using Npgsql;
 
 namespace ConsoleAppTest
 {
@@ -13,54 +14,57 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-
-           
-            //SQLSERVER TEST
-            string strConnection = "Server=.\\SqlExpress;Database=QueryBuilderDatabase;User Id=sa;Password=senha;MultipleActiveResultSets=true;";
-            Compiler compiler = new SqlServerCompiler();
-            
-            using (IDbConnection connection = new SqlConnection(strConnection))
+            try
             {
-                var c = new QueryBuilderSoftDapper(connection, compiler);
+                //POSTGRESQL TEST
+                string strConnection = "Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=senha;";                        
+                Compiler compiler = new PostgresCompiler();
 
-                var reader = c.QueryBuilderMultipleCollection()
-                    .AddQuery(x => x.From("People").OrderBy("Id"))
-                    .AddQuery(x => x.From("Credit").OrderBy("Id"))
-                    .AddQuery(x => x.From("People").Where("Id", 1))
-                    .AddQuery(x => x.From("People").AsCount())
-                    .Results();
+                using (NpgsqlConnection connection = new NpgsqlConnection(strConnection))
+                {
+                    var c = new QueryBuilderSoftDapper(connection, compiler);
 
-                IList<People> peoples0 = reader.Read<People>().ToList();
-                IList<Credit> credit0 = reader.Read<Credit>().ToList();
-                People peoples1 = reader.ReadFirst<People>();
-                int count = reader.ReadFirst<int>();
+                    var reader = c.QueryBuilderMultipleCollection()
+                        .AddQuery(x => x.From("credit").OrderBy("id"))
+                        .AddQuery(x => x.From("credit").OrderBy("description"))
+                        .AddQuery(x => x.From("credit").Where("id", 1))
+                        .AddQuery(x => x.From("credit").AsCount())
+                        .Results();
 
-
-                var b = 10;
-
-                //var peoples = r.Read<People>();
-                //var credits = r.Read<Credit>();
-                //int countPeople = r.ReadFirst<int>();
-
-                //var result = c.AddQuery<Credit>(x =>
-                //    x.From("Credit")
-                //        .AsInsert(new Dictionary<string, object>
-                //        {
-                //            ["Description"] = "Testando 123",
-                //            ["Created"] = DateTime.Now.AddDays(-1)
-                //        })
-                //    )
-                //    .AddQuery<Credit>(x =>
-                //    x.From("Credit")
-                //        .AsInsert(new Dictionary<string, object>
-                //        {
-                //            ["Description"] = "Testando 345",
-                //            ["Created"] = DateTime.Now.AddDays(-2)
-                //        }))
-                //        .Results();
+                    IList<Credit> credit0 = reader.Read<Credit>().ToList();
+                    IList<Credit> credit1 = reader.Read<Credit>().ToList();
+                    Credit credit3 = reader.ReadFirst<Credit>();
+                    int count = reader.ReadFirst<int>();
 
 
+                    var b = 10;
 
+                    //var peoples = r.Read<People>();
+                    //var credits = r.Read<Credit>();
+                    //int countPeople = r.ReadFirst<int>();
+
+                    //var result = c.AddQuery<Credit>(x =>
+                    //    x.From("Credit")
+                    //        .AsInsert(new Dictionary<string, object>
+                    //        {
+                    //            ["Description"] = "Testando 123",
+                    //            ["Created"] = DateTime.Now.AddDays(-1)
+                    //        })
+                    //    )
+                    //    .AddQuery<Credit>(x =>
+                    //    x.From("Credit")
+                    //        .AsInsert(new Dictionary<string, object>
+                    //        {
+                    //            ["Description"] = "Testando 345",
+                    //            ["Created"] = DateTime.Now.AddDays(-2)
+                    //        }))
+                    //        .Results();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             Console.WriteLine("");
