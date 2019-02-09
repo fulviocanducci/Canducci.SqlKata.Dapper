@@ -2,9 +2,9 @@
 
   <PropertyGroup>    	
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.1</Version>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
+    <Version>1.1.2</Version>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.1.2.0</FileVersion>
     <PackageLicenseUrl></PackageLicenseUrl>
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>    
@@ -15,7 +15,7 @@
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
     <PackageTags>SqlKata Dapper SQL Postgres MySql SqlServer</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>Bug Version 1.1.1</PackageReleaseNotes>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
   </PropertyGroup>
 

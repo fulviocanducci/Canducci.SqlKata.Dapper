@@ -5,12 +5,12 @@
     <PackageIconUrl>http://www.oracle.com/technetwork/developer-tools/sql-developer/sqldev-64-2015-2530893.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <Product>Canducci SqlKata Dapper SQLite</Product>
     <Company>Canducci</Company>
     <Authors>Canducci</Authors>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.1.2.0</FileVersion>
     <TargetFrameworks>net451;net46;net47;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
     <PackageTags>SqlKata Dapper SQL PostGres MySql SqlServer</PackageTags>
@@ -23,7 +23,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.1.1" />
+    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.1.2" />
   </ItemGroup>
   
 </Project>

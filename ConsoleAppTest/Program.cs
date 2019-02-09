@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SqlKata.Compilers;
 using Npgsql;
+using MySql.Data.MySqlClient;
 
 namespace ConsoleAppTest
 {
@@ -17,10 +18,10 @@ namespace ConsoleAppTest
             try
             {
                 //POSTGRESQL TEST
-                string strConnection = "Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=senha;";                        
-                Compiler compiler = new PostgresCompiler();
+                string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";                        
+                Compiler compiler = new MySqlCompiler();
 
-                using (NpgsqlConnection connection = new NpgsqlConnection(strConnection))
+                using (MySqlConnection connection = new MySqlConnection(strConnection))
                 {
                     var c = new QueryBuilderSoftDapper(connection, compiler);
 

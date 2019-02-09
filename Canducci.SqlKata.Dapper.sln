@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppTest", "ConsoleAppTest\ConsoleAppTest.csproj", "{ECA5C314-0159-4C58-BD27-DA2F9E654935}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canducci.SqlKata.Dapper.SQLite", "Canducci.SqlKata.Dapper.SQLite\Canducci.SqlKata.Dapper.SQLite.csproj", "{0AD06E3A-FC93-4C4D-9582-D2D04FD36590}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Canducci.SqlKata.Dapper.SQLite", "Canducci.SqlKata.Dapper.SQLite\Canducci.SqlKata.Dapper.SQLite.csproj", "{0AD06E3A-FC93-4C4D-9582-D2D04FD36590}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using System;
 using System.Data;
-using System.Text;
 using SqlKata;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -30,14 +29,14 @@ namespace Canducci.SqlKata.Dapper
 
         public GridReader Results(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = CompilerListQueries(Queries);
+            SqlResult result = Compilers(Queries);
             Clear();
             return Connection.QueryMultiple(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);            
         }
 
         public async Task<GridReader> ResultsAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = CompilerListQueries(Queries);
+            SqlResult result = Compilers(Queries);
             Clear();
             return await Connection.QueryMultipleAsync(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
@@ -50,21 +49,9 @@ namespace Canducci.SqlKata.Dapper
                 Queries.Clear();
         }
 
-        protected SqlResult CompilerListQueries(IList<Query> items)
+        protected SqlResult Compilers(IEnumerable<Query> items)
         {
-            StringBuilder sqls = new StringBuilder();
-            List<object> bindings = new List<object>();
-            if (items.Count > 0)
-            {
-                for (int i = 0; i < items.Count; i++)
-                {
-                    var result = Compiler.Compile(items[i]);
-                    if (sqls.Length > 0) sqls.Append(";");
-                    sqls.Append(result.RawSql);
-                    bindings.AddRange(result.Bindings);
-                }
-            }
-            return new SqlResult() { RawSql = sqls.ToString(), Bindings = bindings };
+            return Compiler.Compile(items);
         }
 
         public void Dispose()
