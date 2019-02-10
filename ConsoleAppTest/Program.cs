@@ -5,10 +5,10 @@ using System.Data;
 using Models;
 using System.Collections.Generic;
 using System.Linq;
-using SqlKata.Compilers;
-using Npgsql;
+using SqlKata.Compilers;    
 using MySql.Data.MySqlClient;
-
+using Canducci.SqlKata.Dapper.Extensions.SoftBuilder;
+using  Canducci.SqlKata.Dapper.MySql;
 namespace ConsoleAppTest
 {
     class Program
@@ -23,22 +23,32 @@ namespace ConsoleAppTest
 
                 using (MySqlConnection connection = new MySqlConnection(strConnection))
                 {
-                    var c = new QueryBuilderSoftDapper(connection, compiler);
+                    var a = connection.SoftBuild()
+                        .From("credit")                        
+                        .AsInsert(new Dictionary<string, object>
+                        {
+                            ["description"] = "desc1",
+                            ["created"] = DateTime.Now.AddDays(-3)
+                        }, true);
+                        var result = a.SaveInsert<int>();
+                    var b = result;
+                    
+                    //var c = new QueryBuilderSoftDapper(connection, compiler);
 
-                    var reader = c.QueryBuilderMultipleCollection()
-                        .AddQuery(x => x.From("credit").OrderBy("id"))
-                        .AddQuery(x => x.From("credit").OrderBy("description"))
-                        .AddQuery(x => x.From("credit").Where("id", 1))
-                        .AddQuery(x => x.From("credit").AsCount())
-                        .Results();
+                    //var reader = c.QueryBuilderMultipleCollection()
+                    //    .AddQuery(x => x.From("credit").OrderBy("id"))
+                    //    .AddQuery(x => x.From("credit").OrderBy("description"))
+                    //    .AddQuery(x => x.From("credit").Where("id", 1))
+                    //    .AddQuery(x => x.From("credit").AsCount())
+                    //    .Results();
 
-                    IList<Credit> credit0 = reader.Read<Credit>().ToList();
-                    IList<Credit> credit1 = reader.Read<Credit>().ToList();
-                    Credit credit3 = reader.ReadFirst<Credit>();
-                    int count = reader.ReadFirst<int>();
+                    //IList<Credit> credit0 = reader.Read<Credit>().ToList();
+                    //IList<Credit> credit1 = reader.Read<Credit>().ToList();
+                    //Credit credit3 = reader.ReadFirst<Credit>();
+                    //int count = reader.ReadFirst<int>();
 
 
-                    var b = 10;
+                    //var b = 10;
 
                     //var peoples = r.Read<People>();
                     //var credits = r.Read<Credit>();

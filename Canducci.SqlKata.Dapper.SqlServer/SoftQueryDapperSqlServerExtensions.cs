@@ -2,19 +2,18 @@
 using Canducci.SqlKata.Dapper.Extensions.Internals;
 using System.Threading.Tasks;
 using SqlKata;
-
 namespace Canducci.SqlKata.Dapper.Extensions.SoftBuilder
 {
     public static class SoftQueryDapperSqlServerExtensions
     {
-        public static T SaveInsert<T>(this Query query, string primaryKeyName = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null) where T : struct
+        public static T SaveInsert<T>(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null) where T : struct
         {            
-            return query.AsQueryBuilderSoftDapper().SaveInsertForSqlServer<T>(primaryKeyName);
+            return query.AsQueryBuilderSoftDapper().SaveInsertForSqlServer<T>();
         }
 
-        public static async Task<T> SaveInsertAsync<T>(this Query query, string primaryKeyName = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null) where T : struct
+        public static async Task<T> SaveInsertAsync<T>(this Query query, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null) where T : struct
         {            
-            return await query.AsQueryBuilderSoftDapper().SaveInsertForSqlServerAsync<T>(primaryKeyName);
+            return await query.AsQueryBuilderSoftDapper().SaveInsertForSqlServerAsync<T>();
         }
     }
 }

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using Canducci.SqlKata.Dapper.Extensions.Internals;
 using SqlKata;
 
 namespace Canducci.SqlKata.Dapper
@@ -119,53 +118,53 @@ namespace Canducci.SqlKata.Dapper
 
         #region ForMysqlInserted
         public T SaveInsertForMysql<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-        {
-            SqlResult result = ((MySqlCompiler)compiler).CompileWithLastId(this);
+        {            
+            SqlResult result = Compiler();
             return connection.QueryFirstOrDefault<T>(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
 
         public async Task<T> SaveInsertForMysqlAsync<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = ((MySqlCompiler)compiler).CompileWithLastId(this);
+            SqlResult result = Compiler();
             return await connection.QueryFirstOrDefaultAsync<T>(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
         #endregion
 
         #region ForPostgresInserted
-        public T SaveInsertForPostGres<T>(string primaryKeyName = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public T SaveInsertForPostGres<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = ((PostgresCompiler)compiler).CompileWithLastId(this, primaryKeyName);
+            SqlResult result = Compiler();
             return connection.QueryFirstOrDefault<T>(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
 
-        public async Task<T> SaveInsertForPostGresAsync<T>(string primaryKeyName = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public async Task<T> SaveInsertForPostGresAsync<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = ((PostgresCompiler)compiler).CompileWithLastId(this, primaryKeyName);
+            SqlResult result = Compiler();
             return await connection.QueryFirstOrDefaultAsync<T>(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
         #endregion
 
         #region ForSqlServerInserted
 
-        public T SaveInsertForSqlServer<T>(string primaryKeyName = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public T SaveInsertForSqlServer<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = Result<T>((SqlServerCompiler)compiler);
+            SqlResult result = Compiler();
             return connection.QueryFirstOrDefault<T>(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
-        public async Task<T> SaveInsertForSqlServerAsync<T>(string primaryKeyName = "id", IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        public async Task<T> SaveInsertForSqlServerAsync<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
-            SqlResult result = Result<T>((SqlServerCompiler)compiler);
+            SqlResult result = Compiler();
             return await connection.QueryFirstOrDefaultAsync<T>(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
 
-        internal SqlResult Result<T>(SqlServerCompiler compiler, string primaryKeyName = "id")            
-        {            
-            SqlResult result = null;
-            if (typeof(T) == typeof(int)) result = compiler.CompileWithLastIdToInt(this);
-            if (typeof(T) == typeof(long)) result = compiler.CompileWithLastIdToLong(this);
-            if (typeof(T) == typeof(Guid)) result = compiler.CompileWithLastIdToGuid(this, primaryKeyName);
-            return result;
-        }
+        //internal SqlResult Result<T>(SqlServerCompiler compiler, string primaryKeyName = "id")            
+        //{            
+        //    SqlResult result = null;
+        //    if (typeof(T) == typeof(int)) result = compiler.CompileWithLastIdToInt(this);
+        //    if (typeof(T) == typeof(long)) result = compiler.CompileWithLastIdToLong(this);
+        //    if (typeof(T) == typeof(Guid)) result = compiler.CompileWithLastIdToGuid(this, primaryKeyName);
+        //    return result;
+        //}
         #endregion
 
         #endregion SoftQueryDapperExtensions

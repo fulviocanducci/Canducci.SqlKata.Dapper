@@ -21,6 +21,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppTest", "ConsoleAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Canducci.SqlKata.Dapper.SQLite", "Canducci.SqlKata.Dapper.SQLite\Canducci.SqlKata.Dapper.SQLite.csproj", "{0AD06E3A-FC93-4C4D-9582-D2D04FD36590}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{96E1850E-3B5D-4A59-8F67-A8BCFDE9816D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppMysql", "WebAppMysql\WebAppMysql.csproj", "{BB44854C-5FF9-4C07-90E0-46D78C3B147F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{6FD05104-71D5-443F-B14C-5EEB48CBC489}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,9 +57,21 @@ Global
 		{0AD06E3A-FC93-4C4D-9582-D2D04FD36590}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AD06E3A-FC93-4C4D-9582-D2D04FD36590}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AD06E3A-FC93-4C4D-9582-D2D04FD36590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB44854C-5FF9-4C07-90E0-46D78C3B147F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB44854C-5FF9-4C07-90E0-46D78C3B147F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB44854C-5FF9-4C07-90E0-46D78C3B147F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB44854C-5FF9-4C07-90E0-46D78C3B147F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FD05104-71D5-443F-B14C-5EEB48CBC489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD05104-71D5-443F-B14C-5EEB48CBC489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD05104-71D5-443F-B14C-5EEB48CBC489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD05104-71D5-443F-B14C-5EEB48CBC489}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BB44854C-5FF9-4C07-90E0-46D78C3B147F} = {96E1850E-3B5D-4A59-8F67-A8BCFDE9816D}
+		{6FD05104-71D5-443F-B14C-5EEB48CBC489} = {96E1850E-3B5D-4A59-8F67-A8BCFDE9816D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F608F29-1A98-4181-A2F1-A11425156410}

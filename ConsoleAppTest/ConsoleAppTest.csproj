@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,12 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="8.0.11" />
-    <PackageReference Include="Npgsql" Version="4.0.2" />
+    <PackageReference Include="MySql.Data" Version="8.0.11" />    
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.csproj" />
+    <ProjectReference Include="..\Canducci.SqlKata.Dapper.MySql\Canducci.SqlKata.Dapper.MySql.csproj" />
   </ItemGroup>
 
 </Project>

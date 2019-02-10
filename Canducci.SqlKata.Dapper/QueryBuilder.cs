@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using SqlKata;
 using SqlKata.Compilers;
@@ -23,7 +24,15 @@ namespace Canducci.SqlKata.Dapper
         protected SqlResult Compiler()
         {            
             return compiler.Compile(this);
-        }        
+        }
+        protected SqlResult Compiler(IEnumerable<Query> queries)
+        {
+            return compiler.Compile(queries);
+        }
+        protected SqlResult Compiler(params Query[] query)
+        {
+            return compiler.Compile(query);
+        }
         #endregion
 
         #region Init

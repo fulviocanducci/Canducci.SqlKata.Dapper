@@ -21,9 +21,9 @@
     </PackageReleaseNotes>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="Canducci.SqlKata.Dapper" Version="1.1.2" />
+    <ProjectReference Include="..\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.csproj" />
   </ItemGroup>
   
 </Project>
