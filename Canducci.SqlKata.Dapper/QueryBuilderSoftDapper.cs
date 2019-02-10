@@ -147,24 +147,31 @@ namespace Canducci.SqlKata.Dapper
         #region ForSqlServerInserted
 
         public T SaveInsertForSqlServer<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
-        {
-            SqlResult result = Compiler();
-            return connection.QueryFirstOrDefault<T>(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
+        {            
+            SqlResult result = Compiler();            
+            string Sql = ReplaceSqlToGuid<T>(result);
+            return connection.QueryFirstOrDefault<T>(Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
         public async Task<T> SaveInsertForSqlServerAsync<T>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             SqlResult result = Compiler();
-            return await connection.QueryFirstOrDefaultAsync<T>(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
+            string Sql = ReplaceSqlToGuid<T>(result);
+            return await connection.QueryFirstOrDefaultAsync<T>(Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
 
-        //internal SqlResult Result<T>(SqlServerCompiler compiler, string primaryKeyName = "id")            
-        //{            
-        //    SqlResult result = null;
-        //    if (typeof(T) == typeof(int)) result = compiler.CompileWithLastIdToInt(this);
-        //    if (typeof(T) == typeof(long)) result = compiler.CompileWithLastIdToLong(this);
-        //    if (typeof(T) == typeof(Guid)) result = compiler.CompileWithLastIdToGuid(this, primaryKeyName);
-        //    return result;
-        //}
+        internal protected string ReplaceSqlToGuid<T>(SqlResult result)
+        {
+            if (typeof(T) == typeof(Guid))
+            {
+                int index = result.Sql.IndexOf(" VALUES");
+                if (index > -1)
+                {
+                    return result.Sql.Insert(index, " OUTPUT INSERTED.Id");
+                }
+            }
+            return result.Sql;
+        }
+
         #endregion
 
         #endregion SoftQueryDapperExtensions
