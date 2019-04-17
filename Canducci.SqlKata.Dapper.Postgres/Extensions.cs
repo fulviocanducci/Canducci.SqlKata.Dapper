@@ -16,5 +16,8 @@ namespace Canducci.SqlKata.Dapper.Postgres
 
         public static QueryBuilderSoftDapper SoftBuild(this IDbConnection connection, string table)
             => new QueryBuilderSoftDapper(connection, new PostgresCompiler(), table);
+
+        public static QueryBuilderMultipleDapper MultipleBuild(this IDbConnection connection)
+            => new QueryBuilderMultipleDapper(connection, new PostgresCompiler());
     }
 }

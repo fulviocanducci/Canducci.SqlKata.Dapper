@@ -25,6 +25,11 @@ namespace WebAppMysql.Controllers
 
         public CreditsController(IDbConnection connection)
         {
+            //var r = connection.MultipleBuild()
+            //    .AddQuery(x => x.From("table").AsInsert(new { id = 1 }, true))
+            //    .AddQuery(x => x.From("table").AsInsert(new { id = 1 }, true))
+            //    .Results();
+            
             Connection = connection;
             Query = connection
                 .SoftBuild()

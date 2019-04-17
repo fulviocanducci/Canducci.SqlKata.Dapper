@@ -15,5 +15,8 @@ namespace Canducci.SqlKata.Dapper.MySql
 
         public static QueryBuilderSoftDapper SoftBuild(this IDbConnection connection, string table)
             => new QueryBuilderSoftDapper(connection, new MySqlCompiler(), table);
+
+        public static QueryBuilderMultipleDapper MultipleBuild(this IDbConnection connection)
+            => new QueryBuilderMultipleDapper(connection, new MySqlCompiler());
     }
 }

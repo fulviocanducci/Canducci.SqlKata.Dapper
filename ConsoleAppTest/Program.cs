@@ -22,7 +22,7 @@ namespace ConsoleAppTest
                 Compiler compiler = new MySqlCompiler();
 
                 using (MySqlConnection connection = new MySqlConnection(strConnection))
-                {
+                {                    
                     var a = connection.SoftBuild()
                         .From("credit")                        
                         .AsInsert(new Dictionary<string, object>

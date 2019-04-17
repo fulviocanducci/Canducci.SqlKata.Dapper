@@ -15,5 +15,8 @@ namespace Canducci.SqlKata.Dapper.SqlServer
 
         public static QueryBuilderSoftDapper SoftBuild(this IDbConnection connection, string table)
             => new QueryBuilderSoftDapper(connection, new SqlServerCompiler(), table);
+
+        public static QueryBuilderMultipleDapper MultipleBuild(this IDbConnection connection)
+            => new QueryBuilderMultipleDapper(connection, new SqlServerCompiler());
     }
 }

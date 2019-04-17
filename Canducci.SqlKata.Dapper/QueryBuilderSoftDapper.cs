@@ -20,14 +20,6 @@ namespace Canducci.SqlKata.Dapper
 
         public void Dispose()
         {
-            if (QueryBuilderMultiple != null)
-            {
-                QueryBuilderMultiple.Dispose();
-            }
-            if (connection != null)
-            {
-                connection.Dispose();
-            }
             connection = null;
             compiler = null;
             GC.SuppressFinalize(this);
@@ -178,16 +170,16 @@ namespace Canducci.SqlKata.Dapper
 
         #region QueryBuilderMultiple        
 
-        private QueryBuilderMultiple QueryBuilderMultiple { get; set; }
+        //private QueryBuilderMultiple QueryBuilderMultiple { get; set; }
 
-        public QueryBuilderMultiple QueryBuilderMultipleCollection()
-        {
-            if (QueryBuilderMultiple == null)
-            {
-                QueryBuilderMultiple = new QueryBuilderMultiple(connection, compiler);
-            }
-            return QueryBuilderMultiple;
-        }        
+        //public QueryBuilderMultiple QueryBuilderMultipleCollection()
+        //{
+        //    if (QueryBuilderMultiple == null)
+        //    {
+        //        QueryBuilderMultiple = new QueryBuilderMultiple(connection, compiler);
+        //    }
+        //    return QueryBuilderMultiple;
+        //}        
         #endregion
     }
 }

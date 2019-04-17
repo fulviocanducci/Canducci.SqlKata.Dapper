@@ -63,7 +63,7 @@ namespace WebAppSqlServer.Controllers
 
                 return RedirectToAction(nameof(Edit), new { id = player.Id });
             }
-            catch (Exception ex)
+            catch
             {
                 return RedirectToAction(nameof(Index));
             }
