@@ -21,18 +21,61 @@ namespace ConsoleAppTest
                 string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";                        
                 Compiler compiler = new MySqlCompiler();
 
-                using (MySqlConnection connection = new MySqlConnection(strConnection))
-                {                    
-                    var a = connection.SoftBuild()
-                        .From("credit")                        
-                        .AsInsert(new Dictionary<string, object>
-                        {
-                            ["description"] = "desc1",
-                            ["created"] = DateTime.Now.AddDays(-3)
-                        }, true);
-                        var result = a.SaveInsert<int>();
-                    var b = result;
-                    
+                MySqlConnection connection = new MySqlConnection(strConnection);
+
+                var multiple = connection.MultipleBuild();
+                multiple.Clear();
+
+                //var resultInsert = multiple
+                //    .AddInsert<int>(x => x.From("test").AsInsert(new { name= Guid.NewGuid().ToString() }, false))
+                //    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, false))
+                //    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, false))
+                //    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
+                //    .ExecuteMultiple()
+                //    .ToList();
+
+                //var a = resultInsert;
+
+
+
+                var resultSelect = multiple
+                    .AddSelect<Test>(x => x.From("test").Where("id", 1))
+                    .AddSelect<Test>(x => x.From("test").Where("id", 2))
+                    .AddSelect<Test>(x => x.From("test").Where("id", 3))
+                    .AddSelect<Test>(x => x.From("test").Where("id", 4))
+                    .ExecuteMultiple()
+                    .ToList();
+
+                var b = resultSelect;
+
+                //var resultsI = connection.MultipleBuild().AddInsert<int>(x => x.From("")).AddInsert<int>(x => x.From("")).ExecuteMultiple();
+                //var resultsD = connection.MultipleBuild().AddDelete(x => x.From("")).ExecuteMultiple();
+                //var resultsS = connection.MultipleBuild().AddSelect<int>(x => x.From("")).ExecuteMultiple();
+                //var resultsU = connection.MultipleBuild().AddUpdate(x => x.From("")).ExecuteMultiple();
+
+
+                //.AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
+                //.AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
+                //.AddSelect<Test>(x => x.From("test").OrderBy("id"))
+
+                ///*.AddQuery<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
+                //.AddQuery<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
+                //.AddQuery<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))*/
+                ////.AddUpdate(x => x.From("test").Where("id", 1).AsUpdate(new { name = Guid.NewGuid().ToString() }))
+                //.ExecuteMultiple()
+                //.ToList();
+
+
+                var aba = connection.SoftBuild();
+                    //    .From("credit")                        
+                    //    .AsInsert(new Dictionary<string, object>
+                    //    {
+                    //        ["description"] = "desc1",
+                    //        ["created"] = DateTime.Now.AddDays(-3)
+                    //    }, true);
+                    //    var result = a.SaveInsert<int>();
+                    //var b = result;
+
                     //var c = new QueryBuilderSoftDapper(connection, compiler);
 
                     //var reader = c.QueryBuilderMultipleCollection()
@@ -71,7 +114,7 @@ namespace ConsoleAppTest
                     //        }))
                     //        .Results();
 
-                }
+                
             }
             catch (Exception ex)
             {
