@@ -26,18 +26,17 @@ namespace ConsoleAppTest
                 var multiple = connection.MultipleBuild();
                 multiple.Clear();
 
-                //var resultInsert = multiple
-                //    .AddInsert<int>(x => x.From("test").AsInsert(new { name= Guid.NewGuid().ToString() }, false))
-                //    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, false))
-                //    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, false))
-                //    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
-                //    .ExecuteMultiple()
-                //    .ToList();
+                var resultInsert = multiple
+                    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, false))
+                    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, false))
+                    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, false))
+                    .AddInsert<int>(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
+                    .ExecuteMultiple()
+                    .ToList();
 
-                //var a = resultInsert;
-
-
-
+                var a = resultInsert;
+                
+                multiple.Clear();
                 var resultSelect = multiple
                     .AddSelect<Test>(x => x.From("test").Where("id", 1))
                     .AddSelect<Test>(x => x.From("test").Where("id", 2))
@@ -47,6 +46,32 @@ namespace ConsoleAppTest
                     .ToList();
 
                 var b = resultSelect;
+
+                foreach(IResultItems item in resultSelect)
+                {
+                    var ab = item.Value;
+                    var c = ab.GetType();
+                    foreach(Test t in item.GetValue<IEnumerable<object>>())
+                    {                        
+                        System.Console.WriteLine("{0:000} {1}", t.Id, t.Name);
+                    }
+                    System.Console.WriteLine("-----------------------------------------------------");
+                }
+
+                multiple.Clear();
+                var resultUpdate = multiple
+                    .AddUpdate(x => x.From("test").Where("id", 1).AsUpdate(new { name = Guid.NewGuid().ToString() }))
+                    .AddUpdate(x => x.From("test").Where("id", 2).AsUpdate(new { name = Guid.NewGuid().ToString() }))
+                    .AddUpdate(x => x.From("test").Where("id", 3).AsUpdate(new { name = Guid.NewGuid().ToString() }))
+                    .AddUpdate(x => x.From("test").Where("id", 4).AsUpdate(new { name = Guid.NewGuid().ToString() }))
+                    .ExecuteMultiple()
+                    .ToList();
+
+                multiple.Clear();
+                var resultDelete = multiple
+                    .AddDelete(x => x.From("test").Where("id", 1).AsDelete())                    
+                    .ExecuteMultiple()
+                    .ToList();
 
                 //var resultsI = connection.MultipleBuild().AddInsert<int>(x => x.From("")).AddInsert<int>(x => x.From("")).ExecuteMultiple();
                 //var resultsD = connection.MultipleBuild().AddDelete(x => x.From("")).ExecuteMultiple();

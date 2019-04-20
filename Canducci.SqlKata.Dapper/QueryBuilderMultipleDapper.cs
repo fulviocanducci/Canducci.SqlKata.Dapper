@@ -10,7 +10,6 @@ using System.Linq;
 
 namespace Canducci.SqlKata.Dapper
 {
-
     public interface IQueryBuilderMultipleExecuteDapper<TResult>
     {
         IEnumerable<TResult> ExecuteMultiple();
@@ -123,70 +122,60 @@ namespace Canducci.SqlKata.Dapper
         #endregion AddInsert
 
         #region Execute
-        //IEnumerable<IResult> IQueryBuilderMultipleExecuteDapper.ExecuteMultiple()
-        //{
-        //    return ExecuteMultiple();
-        //}
-
-        //async Task<IEnumerable<IResult>> IQueryBuilderMultipleExecuteDapper.ExecuteMultipleAsync()
-        //{
-        //    return await ExecuteMultipleAsync();
-        //}
-
-
+        
         IEnumerable<IResultItems> IQueryBuilderMultipleExecuteDapper<IResultItems>.ExecuteMultiple()
         {
-            throw new NotImplementedException();
+            return ExecuteMultiple<IResultItems>();
         }
 
-        Task<IEnumerable<IResultItems>> IQueryBuilderMultipleExecuteDapper<IResultItems>.ExecuteMultipleAsync()
+        async Task<IEnumerable<IResultItems>> IQueryBuilderMultipleExecuteDapper<IResultItems>.ExecuteMultipleAsync()
         {
-            throw new NotImplementedException();
+            return await ExecuteMultipleAsync<IResultItems>();
         }
 
         IEnumerable<IResultAffectedRows> IQueryBuilderMultipleExecuteDapper<IResultAffectedRows>.ExecuteMultiple()
         {
-            throw new NotImplementedException();
+            return ExecuteMultiple<IResultAffectedRows>();
         }
 
-        Task<IEnumerable<IResultAffectedRows>> IQueryBuilderMultipleExecuteDapper<IResultAffectedRows>.ExecuteMultipleAsync()
+        async Task<IEnumerable<IResultAffectedRows>> IQueryBuilderMultipleExecuteDapper<IResultAffectedRows>.ExecuteMultipleAsync()
         {
-            throw new NotImplementedException();
+            return await ExecuteMultipleAsync<IResultAffectedRows>();
         }
 
-        protected IEnumerable<TReturn> ExecuteMultiple<TReturn>()
+        protected IEnumerable<TResult> ExecuteMultiple<TResult>()
         {
-            IEnumerable<TReturn> items = null;
+            IEnumerable<TResult> items = null;
             if (ResultTypeGlobal == ResultType.Insert || ResultTypeGlobal == ResultType.Select)
             {
                 GridReader result = GridReaderResults();
-                items = GetGridReaderResultsMultiple(result);
+                items = GetGridReaderResultsMultiple<TResult>(result);
             }
             if (ResultTypeGlobal == ResultType.Delete || ResultTypeGlobal == ResultType.Update)
             {
-                items = GetAffectedRowsResultsMultiple();
+                items = GetAffectedRowsResultsMultiple<TResult>();
             }
             return items;
         }
 
-        protected async Task<IEnumerable<TReturn>> ExecuteMultipleAsync<TReturn>()
+        protected async Task<IEnumerable<TResult>> ExecuteMultipleAsync<TResult>()
         {
-            IEnumerable<TReturn> items = null;
+            IEnumerable<TResult> items = null;
             if (ResultTypeGlobal == ResultType.Insert || ResultTypeGlobal == ResultType.Select)
             {
                 GridReader result = await GridReaderResultsAsync();
-                items = GetGridReaderResultsMultiple(result);
+                items = GetGridReaderResultsMultiple<TResult>(result);
             }
             if (ResultTypeGlobal == ResultType.Delete || ResultTypeGlobal == ResultType.Update)
             {
-                items = await GetAffectedRowsResultsMultipleAsync();
+                items = await GetAffectedRowsResultsMultipleAsync<TResult>();
             }
             return items;
         }
         #endregion
 
         #region GetResultsMultiple
-        protected IEnumerable<TReturn> GetGridReaderResultsMultiple<TReturn>(GridReader gridReader)
+        protected IEnumerable<TResult> GetGridReaderResultsMultiple<TResult>(GridReader gridReader)
         {
             foreach (Tuple<Type, Query, ResultType> item in Queries)
             {                
@@ -196,45 +185,46 @@ namespace Canducci.SqlKata.Dapper
                     .Select(_ => _.ReturnId)
                     .FirstOrDefault();
 
-                yield return new Result
+                ResultItems result = new ResultItems
                 {
                     ResultType = item.Item3,
-                    Value = item.Item3 == ResultType.Insert 
+                    Value = item.Item3 == ResultType.Insert
                         ? !gridReader.IsConsumed && ReturnId ? gridReader.ReadFirstOrDefault(item.Item1) : null
                         : !gridReader.IsConsumed ? gridReader.Read(item.Item1) : null
                 };
+                yield return ChangeTypeToType<TResult>(result);
             }
             Clear();
         }
 
-        protected IEnumerable<TReturn> GetAffectedRowsResultsMultiple<TReturn>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        protected IEnumerable<TResult> GetAffectedRowsResultsMultiple<TResult>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)          
         {
             foreach (Query query in GetQueries())
             {
-                SqlResult result = Compiler.Compile(query);
-                int affectedRows = Connection.Execute(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
-                yield return new Result
+                SqlResult compiler = Compiler.Compile(query);
+                int affectedRows = Connection.Execute(compiler.Sql, compiler.NamedBindings, transaction, commandTimeout, commandType);
+                ResultAffectedRows result = new ResultAffectedRows
                 {
-                    AffectedRows = affectedRows,
-                    Value = 0,
+                    AffectedRows = affectedRows,                    
                     ResultType = ResultTypeGlobal
                 };
+                yield return ChangeTypeToType<TResult>(result);
             }
         }
 
-        protected async Task<IEnumerable<Result>> GetAffectedRowsResultsMultipleAsync(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        protected async Task<IEnumerable<TResult>> GetAffectedRowsResultsMultipleAsync<TResult>(IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)            
         {
-            IList<Result> results = new List<Result>();
+            IList<TResult> results = new List<TResult>();
             foreach (Query query in GetQueries())
             {
-                SqlResult result = Compiler.Compile(query);
-                int affectedRows = await Connection.ExecuteAsync(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
-                results.Add(new Result
+                SqlResult compiler = Compiler.Compile(query);
+                int affectedRows = await Connection.ExecuteAsync(compiler.Sql, compiler.NamedBindings, transaction, commandTimeout, commandType);
+                ResultAffectedRows result = new ResultAffectedRows
                 {
                     AffectedRows = affectedRows,
-                    Value = 0,
                     ResultType = ResultTypeGlobal
-                });
+                };
+                results.Add(ChangeTypeToType<TResult>(result));
             }
             return results;
         }
@@ -253,6 +243,11 @@ namespace Canducci.SqlKata.Dapper
             return await Connection.QueryMultipleAsync(result.Sql, result.NamedBindings, transaction, commandTimeout, commandType);
         }
         #endregion GetReaderResults
+
+        protected TType ChangeTypeToType<TType>(object value)
+        {
+            return (TType)value;
+        }
 
         protected SqlResult GetSqlResult()
         {
@@ -301,7 +296,8 @@ namespace Canducci.SqlKata.Dapper
 
     public interface IResultItems: IResultBase
     {
-        object Value { get; set; }        
+        object Value { get; set; }
+        T GetValue<T>();
     }
 
     public interface IResultAffectedRows : IResultBase
@@ -309,12 +305,20 @@ namespace Canducci.SqlKata.Dapper
         int AffectedRows { get; set; }        
     }
 
-    public interface IResult : IResultItems, IResultAffectedRows { } 
-
-    public class Result: IResult
+    public class ResultItems : IResultItems
     {
         public object Value { get; set; }
         public ResultType ResultType { get; set; }
-        public int AffectedRows { get; set; } = 0;
+
+        public T GetValue<T>()
+        {
+            return (T)Value;
+        }
+    }
+
+    public class ResultAffectedRows : IResultAffectedRows
+    {
+        public int AffectedRows { get; set; }
+        public ResultType ResultType { get; set; }
     }
 }
