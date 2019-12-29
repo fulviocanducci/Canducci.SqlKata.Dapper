@@ -3,6 +3,7 @@
 [![Version](https://img.shields.io/nuget/v/Canducci.SqlKata.Dapper.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper/)
 [![NuGet](https://img.shields.io/nuget/dt/Canducci.SqlKata.Dapper.svg)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper/)
 [![Build Status](https://travis-ci.org/fulviocanducci/Canducci.SqlKata.Dapper.svg?branch=master)](https://travis-ci.org/fulviocanducci/Canducci.SqlKata.Dapper)
+![Github Workflows](https://github.com/fulviocanducci/Canducci.SqlKata.Dapper/workflows/.NET%20Core/badge.svg)
 
 [![Canducci SqlKata Dapper](https://raw.githubusercontent.com/fulviocanducci/Canducci.SqlKata.Dapper/master/images/icon.png)](https://www.nuget.org/packages/Canducci.SqlKata.Dapper/)
 
