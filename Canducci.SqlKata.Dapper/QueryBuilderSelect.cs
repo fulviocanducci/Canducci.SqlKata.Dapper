@@ -1,9 +1,12 @@
-﻿using Dapper;
+﻿using Canducci.SqlKata.Dapper.Base;
+using Dapper;
 using SqlKata;
 using SqlKata.Compilers;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
+
 namespace Canducci.SqlKata.Dapper
 {
    public class QueryBuilderSelect : QueryBuilderBase
@@ -12,21 +15,29 @@ namespace Canducci.SqlKata.Dapper
          :base(connection, compiler, source)
       {
       }
-      public IEnumerable<T> Get<T>()
+
+      public IEnumerable<T> List<T>()
       {
-         var c = Compiler.Compile(Query);
-         return Connection.Query<T>(c.Sql, c.NamedBindings);
+         SqlResult compile = CompileSqlResult();
+         return Connection.Query<T>(compile.Sql, compile.NamedBindings);
       }
 
-      public T GetFirstOrDefault<T>()
+      public async Task<IEnumerable<T>> ListAsync<T>()
       {
-         var c = Compiler.Compile(Query);
-         return Connection.QueryFirstOrDefault<T>(c.Sql, c.NamedBindings);
+         SqlResult compile = CompileSqlResult();
+         return await Connection.QueryAsync<T>(compile.Sql, compile.NamedBindings);
       }
 
-      public T GetFindOne<T>()
+      public T FindOne<T>()
       {
-         return GetFirstOrDefault<T>();
+         SqlResult compile = CompileSqlResult();
+         return Connection.QueryFirstOrDefault<T>(compile.Sql, compile.NamedBindings);
+      }
+
+      public async Task<T> FindOneAsync<T>()
+      {
+         SqlResult compile = CompileSqlResult();
+         return await Connection.QueryFirstOrDefaultAsync<T>(compile.Sql, compile.NamedBindings);
       }
    }
 }

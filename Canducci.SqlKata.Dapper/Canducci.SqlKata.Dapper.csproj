@@ -2,21 +2,24 @@
 
   <PropertyGroup>    	
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.2</Version>
-    <AssemblyVersion>1.2.2.0</AssemblyVersion>
-    <FileVersion>1.2.2.0</FileVersion>
+    <Version>2.0.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <PackageLicenseUrl></PackageLicenseUrl>
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>    
     <RepositoryUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryUrl>
     <PackageProjectUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</PackageProjectUrl>
-    <PackageIconUrl>http://i1194.photobucket.com/albums/aa377/netdragoon1/abcdef_zpsh8xp8c88.png</PackageIconUrl>
-	  <TargetFrameworks>net451;net46;net47;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;</TargetFrameworks>
+    <PackageIconUrl></PackageIconUrl>
+	  <TargetFrameworks>net451;net46;net47;netstandard1.6;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
     <PackageTags>SqlKata Dapper SQL Postgres MySql SqlServer</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
 
@@ -24,6 +27,24 @@
     <PackageReference Include="Dapper" Version="1.60.6" />
     <PackageReference Include="SqlKata" Version="1.1.7" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
-  </ItemGroup> 
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="..\images\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <!--<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.5' ">
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
+  </ItemGroup>-->
   
 </Project>

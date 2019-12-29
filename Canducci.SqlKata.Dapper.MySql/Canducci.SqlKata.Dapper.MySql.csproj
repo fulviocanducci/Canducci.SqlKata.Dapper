@@ -1,27 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>    
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.2.2.0</AssemblyVersion>
-    <FileVersion>1.2.2.0</FileVersion>
-    <Version>1.2.2</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <Version>2.0.0.0</Version>
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</PackageProjectUrl>
-    <PackageIconUrl>http://i1194.photobucket.com/albums/aa377/netdragoon1/abcdef_zpsh8xp8c88.png</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
     <RepositoryUrl>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryUrl>
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
     <Product>Canducci SqlKata Dapper MySql</Product>
-    <TargetFrameworks>net451;net46;net47;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
+    <TargetFrameworks>net451;net46;net47;netstandard1.6;netstandard2.0;</TargetFrameworks>    
     <PackageTags>SqlKata Dapper SQL MySql</PackageTags>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions + MySQL</Description>
     <PackageReleaseNotes>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper
-https://sqlkata.com/docs
-SqlKata v1.0.1 (fix join, and top with distinct)</PackageReleaseNotes>
+https://sqlkata.com/docs</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Canducci.SqlKata.Dapper\Canducci.SqlKata.Dapper.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\images\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

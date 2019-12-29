@@ -1,14 +1,7 @@
 language: csharp
 mono: none
-dotnet: 2.0.0
+dotnet: 3.1.100
 solution: Canducci.SqlKata.Dapper.sln
-install:
+script:    
   - dotnet restore Canducci.SqlKata.Dapper/Canducci.SqlKata.Dapper.csproj
-  - dotnet restore Canducci.SqlKata.Dapper.MySql/Canducci.SqlKata.Dapper.MySql.csproj
-  - dotnet restore Canducci.SqlKata.Dapper.Postgres/Canducci.SqlKata.Dapper.Postgres.csproj
-  - dotnet restore Canducci.SqlKata.Dapper.SqlServer/Canducci.SqlKata.Dapper.SqlServer.csproj
-script:
-  - dotnet build Canducci.SqlKata.Dapper/Canducci.SqlKata.Dapper.csproj
-  - dotnet build Canducci.SqlKata.Dapper.MySql/Canducci.SqlKata.Dapper.MySql.csproj
-  - dotnet build Canducci.SqlKata.Dapper.Postgres/Canducci.SqlKata.Dapper.Postgres.csproj
-  - dotnet build Canducci.SqlKata.Dapper.SqlServer/Canducci.SqlKata.Dapper.SqlServer.csproj
+  - dotnet test -c Release -f netcoreapp3.1

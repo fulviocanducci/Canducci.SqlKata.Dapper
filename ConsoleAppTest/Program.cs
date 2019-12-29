@@ -19,23 +19,40 @@ namespace ConsoleAppTest
             //POSTGRESQL TEST
             string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";
             Compiler compiler = new MySqlCompiler();
+            MySqlConnection connection = new MySqlConnection(strConnection);
+            
+            Credit c = new Credit();            
+            c.Description = "SOUZA E ALFAMEZA";
+            c.Created = DateTime.Now.AddDays(-150);
+            //var result = connection.Insert(c).Save();
+            c = connection.Insert(c).Save<Credit>();
+            
+            c.Description = "SOUZA E ALFAMEZA E BUCETA";
+            var k = connection.Update(c).Change();
+            System.Console.WriteLine("{0} {1} {2}", c.Id, c.Description, c.Created);
+            //var ca = connection.Update(c).Change();
+            
+            //var b = ca;
 
-            MySqlConnection connection = new MySqlConnection(strConnection);            
-            var result = connection.PrepareQuery(x => x.From("test").OrderBy("id").Where("id", 133).Limit(1)).GetFirstOrDefault<Test>();
-            var count0 = connection
-               .Insert(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
-               .Save();
 
-            var id = count0.Id;
+            //var result = connection.PrepareQuery(x => x.From("test").OrderBy("id").Where("id", 133).Limit(1)).FindOne<Test>();
 
-            var count1 = connection
-               .Insert(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))               
-               .Save();
+            //connection.Insert()
+               
+            //var count0 = connection
+            //   .Insert(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
+            //   .Save();
+
+            //var id = count0.Id;
+
+            //var count1 = connection
+            //   .Insert(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))               
+            //   .Save();
 
             
             
 
-            var a = 100;
+            //var a = 100;
 
             #region init
             //var multiple = connection.MultipleBuild();
