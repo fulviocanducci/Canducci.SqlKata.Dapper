@@ -1,22 +1,19 @@
-﻿using SqlKata.Compilers;
+﻿using SqlKata;
+using SqlKata.Compilers;
+using System;
 using System.Data;
 namespace Canducci.SqlKata.Dapper.MySql
 {
     public static class Extensions
     {
-        public static QueryBuilderDapper Build(this IDbConnection connection)
-            => new QueryBuilderDapper(connection, new MySqlCompiler());
+      public static QueryBuilderSelect PrepareQuery(this IDbConnection connection, Action<Query> source)
+      {
+         return new QueryBuilderSelect(connection, new MySqlCompiler(), source);
+      }
 
-        public static QueryBuilderDapper Build(this IDbConnection connection, string table)
-            => new QueryBuilderDapper(connection, new MySqlCompiler(), table);
-
-        public static QueryBuilderSoftDapper SoftBuild(this IDbConnection connection)
-           => new QueryBuilderSoftDapper(connection, new MySqlCompiler());
-
-        public static QueryBuilderSoftDapper SoftBuild(this IDbConnection connection, string table)
-            => new QueryBuilderSoftDapper(connection, new MySqlCompiler(), table);
-
-        public static QueryBuilderMultipleDapper MultipleBuild(this IDbConnection connection)
-            => new QueryBuilderMultipleDapper(connection, new MySqlCompiler());
-    }
+      public static QueryBuilderInsert Insert(this IDbConnection connection, Action<Query> source)
+      {
+         return new QueryBuilderInsert(connection, new MySqlCompiler(), source);
+      }
+   }
 }

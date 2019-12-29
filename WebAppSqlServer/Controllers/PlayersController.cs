@@ -15,12 +15,12 @@ namespace WebAppSqlServer.Controllers
         public IDbConnection Connection { get; }
         public Query Query { get; }
 
-        protected object GetValues(Player credit)
+        protected object GetValues(Player player)
         {
             return new
             {
-                credit.Description,
-                credit.Created
+                player.Description,
+                player.Created
             };
         }
 
