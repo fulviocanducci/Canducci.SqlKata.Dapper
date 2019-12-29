@@ -40,11 +40,7 @@ namespace Canducci.SqlKata.Dapper.SQLite
          return new QueryBuilderUpdate(connection, new SqliteCompiler(), source);
       }
 
-      public static QueryBuilderUpdate Update(
-         this IDbConnection connection,
-         string table,
-         IReadOnlyDictionary<string, object> values,
-         IReadOnlyDictionary<string, object> where)
+      public static QueryBuilderUpdate Update(this IDbConnection connection, string table, IReadOnlyDictionary<string, object> values, IReadOnlyDictionary<string, object> where)
       {
          return connection.Update(new SqliteCompiler(), table, values, where);
       }

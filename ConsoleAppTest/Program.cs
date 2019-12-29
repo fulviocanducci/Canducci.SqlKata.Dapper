@@ -1,13 +1,10 @@
-﻿using Canducci.SqlKata.Dapper;
-using Canducci.SqlKata.Dapper.MySql;
+﻿using Canducci.SqlKata.Dapper.MySql;
 using Models;
 using MySql.Data.MySqlClient;
 using SqlKata.Compilers;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 namespace ConsoleAppTest
 {
    class Program
@@ -20,25 +17,25 @@ namespace ConsoleAppTest
             string strConnection = "Server=localhost;Database=testdb;Uid=root;Pwd=senha;SslMode=none";
             Compiler compiler = new MySqlCompiler();
             MySqlConnection connection = new MySqlConnection(strConnection);
-            
-            Credit c = new Credit();            
+
+            Credit c = new Credit();
             c.Description = "SOUZA E ALFAMEZA";
             c.Created = DateTime.Now.AddDays(-150);
             //var result = connection.Insert(c).Save();
             c = connection.Insert(c).Save<Credit>();
-            
+
             c.Description = "SOUZA E ALFAMEZA E BUCETA";
             var k = connection.Update(c).Change();
             System.Console.WriteLine("{0} {1} {2}", c.Id, c.Description, c.Created);
             //var ca = connection.Update(c).Change();
-            
+
             //var b = ca;
 
 
             //var result = connection.PrepareQuery(x => x.From("test").OrderBy("id").Where("id", 133).Limit(1)).FindOne<Test>();
 
             //connection.Insert()
-               
+
             //var count0 = connection
             //   .Insert(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))
             //   .Save();
@@ -49,8 +46,8 @@ namespace ConsoleAppTest
             //   .Insert(x => x.From("test").AsInsert(new { name = Guid.NewGuid().ToString() }, true))               
             //   .Save();
 
-            
-            
+
+
 
             //var a = 100;
 
