@@ -12,7 +12,7 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
     <TargetFrameworks>net451;net46;net47;netstandard1.6;netstandard2.0;</TargetFrameworks>    
-    <PackageTags>SqlKata Dapper SQL PostGres MySql SqlServer</PackageTags>
+    <PackageTags>SqlKata Dapper SQL PostGres MySql SqlServer SQLite</PackageTags>
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
     <PackageReleaseNotes>
       https://github.com/fulviocanducci/Canducci.SqlKata.Dapper
