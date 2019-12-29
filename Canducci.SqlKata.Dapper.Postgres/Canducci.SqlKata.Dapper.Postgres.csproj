@@ -11,7 +11,7 @@
     <Authors>Canducci</Authors>
     <Company>Canducci</Company>
     <Product>Canducci SqlKata Dapper Postgres</Product>
-    <TargetFrameworks>net451;net46;net47;netstandard1.6;netstandard2.0;</TargetFrameworks>    
+    <TargetFrameworks>net46;net47;netstandard1.6;netstandard2.0;</TargetFrameworks>    
     <PackageTags>SqlKata Dapper SQL PostGres</PackageTags>
     <RepositoryType>https://github.com/fulviocanducci/Canducci.SqlKata.Dapper</RepositoryType>
     <Description>SqlKata + Dapper + Canducci Wrapper Extensions + PostGres</Description>
